@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Dashboard Overview";
+}
+@model Dashboard_test.Models.Dashboard
+
+@using (Html.BeginForm("CreateTable", "Dashboard", new { Did = Model.Id }, FormMethod.Post))
+{
+    <div>
+        <label>New Table</label>
+        <input type="text" name="Name"/>
+        <input type="submit" value="Create Table" />
+    </div>
+}
+<div class="overlay">
+    @Html.Partial("CreateIssue", new Dashboard_test.ViewModels.IssueViewModel())
+    @Html.Partial("ChangeIssue", new Dashboard_test.ViewModels.IssueViewModel())
+</div>
+    @foreach (var table in Model.Tables)
+    {
+        @Html.Partial("TableSection", table);
+    }
+
