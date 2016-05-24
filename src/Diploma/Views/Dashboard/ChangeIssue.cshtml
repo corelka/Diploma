@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Diploma.ViewModels.IssueViewModel
+
+        <div id="window_change" class="popup">
+        @using (Html.BeginForm("ChangeIssue", "Dashboard", FormMethod.Post))
+        {
+            <input type="hidden" asp-for="@Model.TableID" name="tableId" />
+            <input type="hidden" asp-for="@Model.Id" name="id"/>
+            <a href="javascript:PopUpHide('window_change')">Hide</a>
+            <div>
+                <label>Name of issue</label>
+                <input type="text" asp-for="@Model.Name"  name="name"/>
+            </div>
+            <div>
+                <label>Description</label>
+                <input type="text" asp-for="@Model.Description" name="description"/>
+            </div>
+            <div>
+                <label>Comments</label>
+                <input type="text" asp-for="@Model.Comments" name="comments"/>
+            </div>
+            <input type="submit" value="Save Changes" />
+        }
+        @using (Html.BeginForm("DeleteIssue", "Dashboard", FormMethod.Post))
+        {
+            <input type="hidden" asp-for="@Model.Id" name="id" />
+            <input type="submit" value="Delete Issue" />
+        }
+        </div>

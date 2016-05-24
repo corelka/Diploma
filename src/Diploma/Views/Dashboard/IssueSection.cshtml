@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Diploma.Models.Issue
+
+<li class="ui-state-default issue" id="i-@Model.Id">
+    <div>
+        <p>@Model.Name</p>
+        <p>@Model.Description</p>
+        <p>@Model.Comments</p>
+    </div>
+</li>
