@@ -89,26 +89,41 @@ namespace Diploma.Controllers
             ViewBag.Roles = ViewRoles;
             return View();
         }
-        /*
+
+        //needs to be checked
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registration(ViewModels.RegistrationViewModel RegisteredUser)
         {
-            /*var user = new Student
+            var user = new User()
             {
                 UserName = RegisteredUser.Username,
                 Email = RegisteredUser.Email,
                 Name = RegisteredUser.Name,
                 Surname = RegisteredUser.Surname,
-                Group = new Group
-                {
-                    GroupName = RegisteredUser.Group,
-                    
-                }
-                StudentCard = RegisteredUser.StudentCard,
                 CreateDate = System.DateTime.Now,
             };
 
+            if (RegisteredUser.Role == "Student")
+            {
+                var Student = new Student()
+                {
+                    StudentCard = RegisteredUser.StudentCard,
+                    UserId = user.Id
+                };
+                user.Student = Student;
+                _context.Students.Add(Student);
+            }
+            else
+            {
+                var Teacher = new Teacher()
+                {
+                    UserId = user.Id
+                };
+                user.Teacher = Teacher;
+                _context.Teachers.Add(Teacher);
+            }
+            
             if (RegisteredUser.Avatar != null)
             {
                 string nameForAvatar = user.Id + '.' + GetFileName(RegisteredUser.Avatar.ContentDisposition)[1];
@@ -116,17 +131,20 @@ namespace Diploma.Controllers
                 RegisteredUser.Avatar.SaveAs(pathForAvatar);
                 user.Avatar = nameForAvatar.ToString();
             }
-
+                        
             var success = await _userManager.CreateAsync(user, RegisteredUser.Password);
             var result = await _userManager.AddToRoleAsync(user, RegisteredUser.Role);
-            if(success.Succeeded && result.Succeeded)
+            if (success.Succeeded && result.Succeeded)
             {
                 SendConfirmationEmail(user);
+                _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
-            return View(RegisteredUser);           
-        }*/
-        
+            return View(RegisteredUser);
+        }
+
+
+
         public async void SendConfirmationEmail(User user)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -193,7 +211,7 @@ namespace Diploma.Controllers
 
 
         //change according to teacher and student
-        /*
+        
         [Authorize]
         public async Task<IActionResult> ChangeProfile()
         {
@@ -204,7 +222,6 @@ namespace Diploma.Controllers
                 Name = currentUser.Name,
                 Surname = currentUser.Surname,
                 Email = currentUser.Email,
-                Group = currentUser.Group,
                 EmailConfirmed = currentUser.EmailConfirmed 
             };
             return View(ChangeProfile);
@@ -218,11 +235,10 @@ namespace Diploma.Controllers
             User currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
             currentUser.Name = _changeProfile.Name;
             currentUser.Surname = _changeProfile.Surname;
-            currentUser.Group = _changeProfile.Group;
             currentUser.Email = _changeProfile.Email;
             currentUser.UserName = _changeProfile.Username;
             _context.SaveChanges();
             return RedirectToAction("Index", "Home");
-        }*/
+        }
     }
 }

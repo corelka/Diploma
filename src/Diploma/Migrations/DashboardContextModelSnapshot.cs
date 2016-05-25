@@ -16,6 +16,44 @@ namespace Diploma.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Diploma.Models.CalendarEvent", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("UserName");
+
+                    b.Property<bool>("allDay");
+
+                    b.Property<string>("backgroundColor");
+
+                    b.Property<string>("borderColor");
+
+                    b.Property<string>("className");
+
+                    b.Property<string>("color");
+
+                    b.Property<bool>("durationEditable");
+
+                    b.Property<bool>("editable");
+
+                    b.Property<DateTime>("end");
+
+                    b.Property<string>("rendering");
+
+                    b.Property<DateTime>("start");
+
+                    b.Property<bool>("startEditable");
+
+                    b.Property<string>("textColor");
+
+                    b.Property<string>("title");
+
+                    b.Property<string>("url");
+
+                    b.HasKey("id");
+                });
+
             modelBuilder.Entity("Diploma.Models.Dashboard", b =>
                 {
                     b.Property<int>("Id")
@@ -83,6 +121,8 @@ namespace Diploma.Migrations
 
                     b.Property<int>("TimeTableId");
 
+                    b.Property<int>("day");
+
                     b.HasKey("ScheduleId");
                 });
 
@@ -94,6 +134,8 @@ namespace Diploma.Migrations
                     b.Property<int?>("GroupId");
 
                     b.Property<string>("StudentCard");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("StudentId");
                 });
@@ -146,6 +188,8 @@ namespace Diploma.Migrations
                 {
                     b.Property<int>("TeacherId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("TeacherId");
                 });
@@ -216,11 +260,7 @@ namespace Diploma.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("StudentId");
-
                     b.Property<string>("Surname");
-
-                    b.Property<int?>("TeacherId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -379,6 +419,10 @@ namespace Diploma.Migrations
                     b.HasOne("Diploma.Models.Group")
                         .WithMany()
                         .HasForeignKey("GroupId");
+
+                    b.HasOne("Diploma.Models.User")
+                        .WithOne()
+                        .HasForeignKey("Diploma.Models.Student", "UserId");
                 });
 
             modelBuilder.Entity("Diploma.Models.SubjectGroups", b =>
@@ -410,6 +454,13 @@ namespace Diploma.Migrations
                         .HasForeignKey("DashboardId");
                 });
 
+            modelBuilder.Entity("Diploma.Models.Teacher", b =>
+                {
+                    b.HasOne("Diploma.Models.User")
+                        .WithOne()
+                        .HasForeignKey("Diploma.Models.Teacher", "UserId");
+                });
+
             modelBuilder.Entity("Diploma.Models.TeacherGroup", b =>
                 {
                     b.HasOne("Diploma.Models.Group")
@@ -419,17 +470,6 @@ namespace Diploma.Migrations
                     b.HasOne("Diploma.Models.Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
-                });
-
-            modelBuilder.Entity("Diploma.Models.User", b =>
-                {
-                    b.HasOne("Diploma.Models.Student")
-                        .WithOne()
-                        .HasForeignKey("Diploma.Models.User", "StudentId");
-
-                    b.HasOne("Diploma.Models.Teacher")
-                        .WithOne()
-                        .HasForeignKey("Diploma.Models.User", "TeacherId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -462,10 +502,6 @@ namespace Diploma.Migrations
                     b.HasOne("Diploma.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Diploma.Models.Admin", b =>
-                {
                 });
         }
     }

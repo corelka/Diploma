@@ -23,7 +23,7 @@ else
         <h1>Teacher</h1>
     }
 }
-<a asp-action="Calendar">Calendar</a>
+<a asp-controller="Calendar" asp-action="Calendar">Calendar</a>
 <a asp-controller="Dashboard" asp-action="CreateDashboard">Create new one</a>
 <a asp-action="Notes">Notes</a>
 <ul>
@@ -32,3 +32,5 @@ else
         <li><a href="/Dashboard/Overview/@dashboard.Id">@dashboard.Name</a></li>
     }
     </ul>
+
+<script></script>

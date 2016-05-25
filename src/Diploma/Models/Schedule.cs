@@ -12,5 +12,6 @@ namespace Diploma.Models
         public int TeacherId { get; set; }
         public int GroupId { get; set; }
         public int TimeTableId { get; set; }
+        public DayOfWeek day { get; set; }
     }
 }

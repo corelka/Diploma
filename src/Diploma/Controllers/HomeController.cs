@@ -29,10 +29,7 @@ namespace Diploma.Controllers
             else
                 return RedirectToAction("Login", "Account");
         }
-        public ViewResult Calendar()
-        {
-            return View();
-        }
+
         //public ViewResult Notes()
         //{
         //    var user = _context.Users.FirstOrDefault(t => t.Name == User.Identity.Name);

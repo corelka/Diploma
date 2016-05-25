@@ -6,13 +6,21 @@
 
 
     <title>@ViewBag.Title</title>
-    <link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
-    <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
-    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>
     <script src="~/lib/moment/moment.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+    
+    <link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
+    <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+    
+    
+    
    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>--> 
     <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
     <style>        
@@ -47,22 +55,36 @@
               overflow:hidden;
               position:fixed;
               top:0px;
+              z-index:5;
+          }
+          .datetimepicker{
+
           }
     </style>
     <script>
+       
+
         $(document).ready(function () {
             PopUpHide();
+            /*$('#datetimepicker1').datepicker();({
+                language: 'en',
+                pick12HourFormat: true
+            });*/$('.datetimepicker1').datetimepicker({ language: 'ru' });
             $('#calendar').fullCalendar({
+                height: 650,
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                defaultDate: '2016-01-12',
+                defaultDate: '2016-05-25',
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
+                events:{
+                    url: '/Calendar/GetEvents?UserName=@User.Identity.Name'                
+                }
+                    
+                    /*{
                         title: 'All Day Event',
                         start: '2016-01-01'
                     },
@@ -117,21 +139,21 @@
                         url: 'http://google.com/',
                         start: '2016-01-28'
                     }
-                ]
+                ]*/
             });
         });
         function PopUpShow(window) {
             console.log(window);
             $(".overlay").show();
             $('#'+window).show();
-            $(".issue").attr("style","position:inherit;");
+            $('#'+window+' input[type!=hidden],[type!=submit]').attr("value","");
         }
         function PopUpHide() {
             $(".overlay").hide();
             $(".popup").hide();
             //$("#window_change").hide();
             //$("#create_issue").hide();
-            $(".issue").attr("style", "position:relative;");
+            //$(".issue").attr("style", "position:relative;");
         }
         $(function() {
         //$(".table").sortable({ revert: true });

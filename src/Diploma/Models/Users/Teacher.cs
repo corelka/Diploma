@@ -18,6 +18,8 @@ namespace Diploma.Models
         public virtual ICollection<TeacherGroup> Groups { get; set; }
         public virtual ICollection<SubjectTeacher> Subjects { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
 }

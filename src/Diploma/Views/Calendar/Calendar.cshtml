@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+    <div id="calendar">
+    </div>
+    <div>
+        <a href="javascript:PopUpShow('create_event')">Create Event</a>
+    </div>
+<div class="overlay">
+    @Html.Partial("CreateEvent", new Diploma.ViewModels.CreateEventViewModel())
+</div>

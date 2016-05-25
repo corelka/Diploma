@@ -13,7 +13,6 @@ namespace Diploma.ViewModels
         public string Surname { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
-        public string Group { get; set; }
         public IFormFile Avatar { get; set; }
     }
 }

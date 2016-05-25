@@ -28,6 +28,7 @@ namespace Diploma.Models
                 Teacher = new Teacher()
             };
             user_t.Teacher.User = user_t;
+            user_t.Teacher.UserId = user_t.Id;
             _context.Teachers.Add(user_t.Teacher);
             _userManager.CreateAsync(user_t, "Qwerty1!").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(user_t, "Teacher").GetAwaiter().GetResult();
@@ -42,6 +43,7 @@ namespace Diploma.Models
                 Student = new Student()
             };
             user_t.Student.User = user_t;
+            user_t.Student.UserId = user_t.Id;
             _context.Students.Add(user_t.Student);
             _userManager.CreateAsync(user_t, "Qwerty1!").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(user_t, "Student").GetAwaiter().GetResult();
@@ -239,31 +241,53 @@ namespace Diploma.Models
                     GroupId = gr1.GroupId,
                     SubjectId = subj1.SubjectId,
                     TeacherId = t1.Teacher.TeacherId,
-                    TimeTableId = p1.TimeTableId
+                    TimeTableId = p1.TimeTableId,
+                    day = DayOfWeek.Monday
+                    
                 };
                 var s2 = new Schedule()
                 {
                     GroupId = gr1.GroupId,
                     SubjectId = subj2.SubjectId,
                     TeacherId = t3.Teacher.TeacherId,
-                    TimeTableId = p2.TimeTableId
+                    TimeTableId = p2.TimeTableId,
+                    day = DayOfWeek.Wednesday
                 };
                 var s3 = new Schedule()
                 {
                     GroupId = gr2.GroupId,
                     SubjectId = subj1.SubjectId,
                     TeacherId = t1.Teacher.TeacherId,
-                    TimeTableId = p2.TimeTableId
+                    TimeTableId = p2.TimeTableId,
+                    day = DayOfWeek.Friday
                 };
                 var s4 = new Schedule()
                 {
                     GroupId = gr2.GroupId,
                     SubjectId = subj4.SubjectId,
                     TeacherId = t5.Teacher.TeacherId,
-                    TimeTableId = p3.TimeTableId
+                    TimeTableId = p3.TimeTableId,
+                    day = DayOfWeek.Thursday
                 };
 
                 _context.Schedules.AddRange(s1, s2, s3, s4);
+
+                var eve = new CalendarEvent()
+                {
+                    UserName = t1.UserName,
+                    title = "newEvent!",
+                    start = new DateTime(2016, 5, 25, 8, 0, 0),
+                    end = new DateTime(2016, 5, 25, 9, 45, 0)
+                };
+
+                var eve2 = new CalendarEvent()
+                {
+                    UserName = t1.UserName,
+                    title = "newEvent!",                    
+                    start = new DateTime(2016, 5, 25, 10, 0, 0),
+                    end = new DateTime(2016, 5, 25, 11, 20, 0)
+                };
+                _context.Events.AddRange(eve, eve2);
 
                 _context.SaveChanges();
             }

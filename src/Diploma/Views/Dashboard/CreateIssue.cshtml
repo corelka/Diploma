@@ -9,7 +9,7 @@
         <p>"Create New Issue"</p>
         @using (Html.BeginForm("CreateIssue", "Dashboard", FormMethod.Post))
         {
-            <a href="javascript:PopUpHide('window_change')">Hide</a>
+            <a href="javascript:PopUpHide('window_create')">Hide</a>
             <input type="hidden" name="tableId" value="@ViewBag.TableId" asp-for="@Model.TableID" />
             <div>
                 <label>Name</label>
