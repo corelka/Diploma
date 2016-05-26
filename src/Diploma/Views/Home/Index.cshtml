@@ -23,7 +23,7 @@ else
         <h1>Teacher</h1>
     }
 }
-<a asp-controller="Calendar" asp-action="Calendar">Calendar</a>
+<a asp-controller="Calendar" asp-action="Overview">Calendar</a>
 <a asp-controller="Dashboard" asp-action="CreateDashboard">Create new one</a>
 <a asp-action="Notes">Notes</a>
 <ul>
@@ -33,4 +33,12 @@ else
     }
     </ul>
 
-<script></script>
+
+<div class="form-group">
+    <div class="input-group date datetimepicker">
+        <input type="text" class="form-control" />
+        <span class="input-group-addon">
+            <span class="glyphicon-calendar glyphicon"></span>
+        </span>
+    </div>
+</div>

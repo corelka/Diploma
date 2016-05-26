@@ -1,4 +1,5 @@
 ﻿using Diploma.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
@@ -6,8 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
+using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Diploma.Controllers
 {
@@ -21,16 +25,54 @@ namespace Diploma.Controllers
             _userManager = userManager;
         }
 
-        public ViewResult Calendar()
+        public ViewResult Overview()
         {
-            return View();
+            return View("Calendar");
         }
 
-        [HttpGet]
-        public JsonResult GetEvents(string UserName)
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage DeleteEvent()
         {
-            var events = _context.Events.Where(t => t.UserName == UserName).ToList();
-            var user = _context.Users.FirstOrDefault(t => t.UserName == UserName);
+            ViewModels.CreateEventViewModel _event = JsonConvert.DeserializeObject<ViewModels.CreateEventViewModel>(Request.Form.Keys.First());
+
+            var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name && 
+                                                        t.start == Convert.ToDateTime(_event.start,new CultureInfo("en-US")) && 
+                                                        t.end == Convert.ToDateTime(_event.end, new CultureInfo("en-US"))); 
+            if (ev!= null)
+            {
+                _context.Events.Remove(ev);
+                _context.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }            
+            return new HttpResponseMessage(HttpStatusCode.NotFound);           
+        }
+
+        //------------------------------------------------------------------------------------------------------------------
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage ChangeEvent()
+        {
+            var _event = JsonConvert.DeserializeObject<ViewModels.ChangeEventViewModel>(Request.Form.Keys.First());
+            var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name &&
+                                                        t.start == Convert.ToDateTime(_event.start, new CultureInfo("en-US")) &&
+                                                        t.end == Convert.ToDateTime(_event.end, new CultureInfo("en-US")));
+            if (ev != null)
+            {
+                ev.end = Convert.ToDateTime(_event.newDate, new CultureInfo("en-US"));
+                _context.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            return new HttpResponseMessage(HttpStatusCode.NotFound);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult GetEvents()
+        {
+            var events = _context.Events.Where(t => t.UserName == User.Identity.Name).ToList();
+            var user = _context.Users.FirstOrDefault(t => t.UserName == User.Identity.Name);
             if(_userManager.IsInRoleAsync(user, "Teacher").GetAwaiter().GetResult())
             {
                 var user_ = _context.Teachers.FirstOrDefault(t => t.UserId == user.Id);
@@ -101,27 +143,14 @@ namespace Diploma.Controllers
             }            
         }
 
-
+        [Authorize]
         [HttpPost]
-        public ViewResult CreateEvent(ViewModels.CreateEventViewModel createEvent)
+        public ActionResult CreateEvent(ViewModels.CreateEventViewModel createEvent)
         {
-            var _event = new CalendarEvent()
-            {
-                title = createEvent.title,
-                allDay = createEvent.allDay,
-                start = createEvent.start,
-                end = createEvent.end,
-                url = createEvent.url,
-                UserName = createEvent.UserName,
-                durationEditable = createEvent.editable,
-                startEditable = createEvent.editable,
-                editable = createEvent.editable
-            };
+            var _event = new CalendarEvent(createEvent, User.Identity.Name);
             _context.Events.Add(_event);
             _context.SaveChanges();
-            return View("Calendar");
-        }
-
-        
+            return RedirectToAction("Overview");
+        }        
     }
 }

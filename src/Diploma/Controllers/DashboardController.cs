@@ -112,14 +112,7 @@ namespace Diploma.Controllers
         [HttpPost]
         public ActionResult CreateIssue(ViewModels.IssueViewModel issueModel)
         {
-            Issue issue = new Issue()
-            {
-                Name = issueModel.Name,
-                Description = issueModel.Description,
-                Comments = issueModel.Comments,
-                Created = DateTime.Now,
-                TableId = issueModel.TableID
-            };
+            Issue issue = new Issue(issueModel);
             var table = _context.Tables.First(c => c.Id == issueModel.TableID);
             table.Issues.Add(issue);
             _context.SaveChanges();
