@@ -27,7 +27,8 @@
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
     "jQuery.Fullcalendar": "2.4.0",
     "System.ComponentModel.Annotations": "4.0.11-beta-23516",
-    "Newtonsoft.Json": "8.0.3"
+    "Newtonsoft.Json": "8.0.3",
+    "Microsoft.AspNet.Mvc.WebApiCompatShim": "6.0.0-rc1-final",
   },
 
   "commands": {

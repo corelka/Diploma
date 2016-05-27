@@ -11,9 +11,57 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Routing;
 
 namespace Diploma
 {
+    //public class CustomAuthorizedAttribute: AuthorizeAttribute
+    //{
+    //    protected override AuthorizeCore
+    //    public override void OnAuthorization(AuthorizationContext filterContext)
+    //    {
+
+    //        base.OnAuthorization(filterContext);
+
+    //        // this is overriden for kendo menus to hide 
+    //        var ctrl = filterContext.RequestContext.RouteData.GetRequiredString("controller");
+    //        var action = filterContext.ActionDescriptor.ActionName;
+
+    //    [custom authorization logic on action/ctrl]
+
+    //    // useful to determine if it's authorizing current controller path or menu links
+    //    var path = filterContext.HttpContext.Request.PhysicalPath;
+    //    _authorizingCurrentPath = path.Contains(ctrl) || path.EndsWith("WebUI") ;
+
+
+    //    if (userAuth<requiredAuth)
+    //        HandleUnauthorizedRequest(filterContext);
+    //}
+
+
+    //protected override void HandleUnauthorizedRequest(AuthorizationContext ctx)
+    //{
+    //    if (!ctx.HttpContext.User.Identity.IsAuthenticated)
+    //        base.HandleUnauthorizedRequest(ctx);
+    //    else {
+    //        if (_authorizingCurrentPath)
+    //        {
+    //            // handle controller access
+    //            ctx.Result = new ViewResult { ViewName = "Unauthorized" };
+    //            ctx.HttpContext.Response.StatusCode = 403;
+    //        }
+    //        else {
+    //            // handle menu links
+    //            ctx.Result = new HttpUnauthorizedResult();
+    //            ctx.HttpContext.Response.StatusCode = 403;
+    //        }
+    //    }
+    //}
+
+
+
     public class Startup
     {
         public static IConfigurationRoot Configuration { get; set; }

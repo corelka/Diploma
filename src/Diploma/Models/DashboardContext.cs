@@ -26,6 +26,7 @@ namespace Diploma.Models
         public DbSet<UserRoles> Roles { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
 
+
         public DashboardContext()
         {
             Database.EnsureCreated();

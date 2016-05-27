@@ -4,17 +4,39 @@
         language: 'en',
         pick12HourFormat: true
     });*/
-    /*$('#create_event_sub').click(function () {
-        $.ajaxForm({
-            url: '/Calendar/CreateEvent',
-            type: 'POST',
+    /*$("#create_event").submit(function (e) {
+        e.preventDefault();
+
+    });*/
+    $('#create_event_sub').click(function () {
+        $.ajax({
+            url: "/CalendarEvent/CreateEvent",
+            type: "POST",
+            contentType: 'application/json',
+            data: $('#create_event').serialize(),
             success: function (data) {
-                $('#calendar').fullCalendar('removeEvents', event._id);
+                if (data.StatusCode != 200) {
+                    alert('fail!');
+                }
+                else alert('success');
+            },
+            fail: function () {
+                alert('fail!');
             }
         });
-    });*/
+        PopUpHide();
+        return false;
+        //$.ajaxSubmit({
+        //    url: '/CalendarEvent/CreateEvent',
+        //    type: 'POST',
+        //    success: function (data) {
+        //        console.log($form);
+        //        //$('#calendar').fullCalendar('removeEvents', event._id);
+        //    }
+        //});
+    });
     $('.datetimepicker').datetimepicker({ language: 'ru' });
-    var resizing = null;
+    var temp_event = {};
     $('#calendar').fullCalendar({
         height: 650,
         header: {
@@ -27,42 +49,92 @@
             element.find(".closeon").click(function () {
                 var req = JSON.stringify(event,["title","start","end"]);
                 console.log(req);
-                $.post("/Calendar/DeleteEvent", req, function () {
-                    $('#calendar').fullCalendar('removeEvents', event._id);
+                $.post("/CalendarEvent/DeleteEvent", req, function (data) {
+                    if (data.StatusCode != 200) {
+                        alert("success!");
+                        $('#calendar').fullCalendar('removeEvents', event._id);
+                    }                    
                 });
             });
         },
-
         //defaultDate: '2016-05-25',
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true,
         events: {
-            url: '/Calendar/GetEvents'
+            url: '/CalendarEvent/GetEvents'
         },
         eventResizeStart: function (event){
-            resizing = event.end;
+            for (var key in event) {
+                temp_event[key] = event[key];
+            }
         },
         eventResize: function (event, delta, revertFunc) {
-            //console.log(resizing);
-            //console.log(event);
-            //console.log(resizing.end);
-            console.log(resizing);
-            console.log(event.end.format());
             var req = {
                 title: event.title,
-                start: event.start,
-                end: event.end,
-                newEnd: resizing
+                newStartDate: event.start.format(),
+                newEndDate: event.end.format(),
+                start: temp_event.start.format(),
+                end: temp_event.end.format()
             };
-            var req = JSON.stringify(req);
-            console.log(req);
-            $.post("/Calendar/ChangeEvent", req, function () { });
+            $.ajax({
+                url: "/CalendarEvent/ChangeEvent",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(req),
+                success: function (data) {
+                    if (data.StatusCode != 200) {
+                        alert('fail!');
+                        revertFunc();
+                    }
+                    temp_event = {};
+                },
+                fail: function () {
+                    alert('fail!');
+                    temp_event = {};
+                    revertFunc();
+                }
+            });
+            //$.post("/Calendar/ChangeEvent", req, function () { });
             //alert(event.title + " end is now " + event.end.format());
             //if (!confirm("is this okay?")) {
             //    revertFunc();
             //};
-            console.log(event.end.format());
-            //resizing = null;
+            //console.log(event.end.format());
+            //temp_event = null;
+        },
+
+        eventDragStart: function (event) {
+            for (var key in event) {
+                temp_event[key] = event[key];
+            }
+        },
+
+        eventDrop: function (event, delta, revertFunc) {
+            var req = {
+                title: event.title,
+                newStartDate: event.start.format(),
+                newEndDate: event.end.format(),
+                start: temp_event.start.format(),
+                end: temp_event.end.format()
+            };
+            $.ajax({
+                url: "/CalendarEvent/ChangeEvent",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(req),
+                success: function (data) {
+                    if (data.StatusCode != 200) {
+                        alert('fail!');
+                        revertFunc();
+                    }
+                    temp_event = {};
+                },
+                fail: function () {
+                    alert('fail!');
+                    temp_event = {};
+                    revertFunc();
+                }
+            });
         }
 
 
@@ -134,12 +206,8 @@ function PopUpShow(window,clear) {
 function PopUpHide() {
     $(".overlay").hide();
     $(".popup").hide();
-    //$("#window_change").hide();
-    //$("#create_issue").hide();
-    //$(".issue").attr("style", "position:relative;");
 }
 $(function () {
-    //$(".table").sortable({ revert: true });
     $(".table").droppable({
         drop: function (event, ui) {
             var prev = $(ui.draggable).parent().attr("id");
@@ -154,8 +222,6 @@ $(function () {
                         tableID: $(this).attr('id').substring(2),
                         issueID: ui.draggable.attr('id').substring(2)
                     });
-            //console.log($(this).attr('id').substring(2));
-            //console.log(ui.draggable.attr('id').substring(2));
         }
     });
 
@@ -180,6 +246,5 @@ $(function () {
         $("#window_change").find("input[name=description]").attr("value", inp[1].textContent);
         $("#window_change").find("input[name=comments]").attr("value", inp[2].textContent);
         PopUpShow("window_change",false);
-        //$("#window_change").attr("style", "display:block;");
     });
 });

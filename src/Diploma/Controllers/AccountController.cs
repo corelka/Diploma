@@ -63,6 +63,7 @@ namespace Diploma.Controllers
                     ModelState.AddModelError("", "Username or Password incorrecct!");
                 }
             }
+            
             return View();
         }
 
@@ -233,11 +234,15 @@ namespace Diploma.Controllers
         public async Task<IActionResult> ChangeProfile(ChangeProfileViewModel _changeProfile)
         {
             User currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            
             currentUser.Name = _changeProfile.Name;
             currentUser.Surname = _changeProfile.Surname;
             currentUser.Email = _changeProfile.Email;
             currentUser.UserName = _changeProfile.Username;
+            await _userManager.UpdateAsync(currentUser);
             _context.SaveChanges();
+            await _signInManager.SignOutAsync();
+            await _signInManager.SignInAsync(currentUser, true);
             return RedirectToAction("Index", "Home");
         }
     }

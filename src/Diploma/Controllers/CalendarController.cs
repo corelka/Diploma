@@ -12,30 +12,33 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Web.Http;
 
 namespace Diploma.Controllers
 {
     public class CalendarController: Controller
     {
+        [Authorize]
+        public ViewResult Overview()
+        {
+            return View("Calendar");
+        }
+    }
+
+    public class CalendarEventController: ApiController
+    {
         private DashboardContext _context;
         private UserManager<User> _userManager;
-        public CalendarController(DashboardContext context, UserManager<User> userManager)
+        public CalendarEventController(DashboardContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        public ViewResult Overview()
-        {
-            return View("Calendar");
-        }
-
         [Authorize]
         [HttpPost]
-        public HttpResponseMessage DeleteEvent()
+        public HttpResponseMessage DeleteEvent(ViewModels.CreateEventViewModel _event)
         {
-            ViewModels.CreateEventViewModel _event = JsonConvert.DeserializeObject<ViewModels.CreateEventViewModel>(Request.Form.Keys.First());
-
             var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name && 
                                                         t.start == Convert.ToDateTime(_event.start,new CultureInfo("en-US")) && 
                                                         t.end == Convert.ToDateTime(_event.end, new CultureInfo("en-US"))); 
@@ -48,24 +51,23 @@ namespace Diploma.Controllers
             return new HttpResponseMessage(HttpStatusCode.NotFound);           
         }
 
-        //------------------------------------------------------------------------------------------------------------------
         [Authorize]
         [HttpPost]
-        public HttpResponseMessage ChangeEvent()
+        public HttpResponseMessage ChangeEvent([FromBody]ViewModels.ChangeEventViewModel _event)
         {
-            var _event = JsonConvert.DeserializeObject<ViewModels.ChangeEventViewModel>(Request.Form.Keys.First());
             var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name &&
+                                                        t.title == _event.title &&
                                                         t.start == Convert.ToDateTime(_event.start, new CultureInfo("en-US")) &&
                                                         t.end == Convert.ToDateTime(_event.end, new CultureInfo("en-US")));
             if (ev != null)
             {
-                ev.end = Convert.ToDateTime(_event.newDate, new CultureInfo("en-US"));
+                ev.start = Convert.ToDateTime(_event.newStartDate, new CultureInfo("en-US"));
+                ev.end = Convert.ToDateTime(_event.newEndDate, new CultureInfo("en-US"));
                 _context.SaveChanges();
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             return new HttpResponseMessage(HttpStatusCode.NotFound);
         }
-
 
         [Authorize]
         [HttpGet]
@@ -145,12 +147,20 @@ namespace Diploma.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult CreateEvent(ViewModels.CreateEventViewModel createEvent)
+
+        public HttpResponseMessage CreateEvent(ViewModels.CreateEventViewModel createEvent)
         {
-            var _event = new CalendarEvent(createEvent, User.Identity.Name);
-            _context.Events.Add(_event);
-            _context.SaveChanges();
-            return RedirectToAction("Overview");
+            try
+            {
+                var _event = new CalendarEvent(createEvent, User.Identity.Name);
+                _context.Events.Add(_event);
+                _context.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            }
         }        
     }
 }

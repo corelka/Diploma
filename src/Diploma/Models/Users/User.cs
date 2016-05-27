@@ -4,11 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
+
+
 
 namespace Diploma.Models
 {
     public class User : IdentityUser
     {
+        /*public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
+        }*/
+
         public DateTime CreateDate { get; set; }
         public string Name { get; set; }
 
