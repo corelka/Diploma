@@ -28,6 +28,6 @@
         @using (Html.BeginForm("DeleteIssue", "Dashboard", FormMethod.Post))
         {
             <input type="hidden" asp-for="@Model.Id" name="id" />
-            <input type="submit" value="Delete Issue" />
+            <input type="submit" class="btn btn-primary" value="Delete Issue" />
         }
         </div>

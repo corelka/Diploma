@@ -319,3 +319,7 @@ $(function () {
 
 
 
+$('.overlay').click(function (event) {
+    if ($(event.target).hasClass('overlay'))
+        $(this).toggle();
+});

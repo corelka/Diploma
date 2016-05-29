@@ -9,12 +9,8 @@
 <div id="create_dashboard" class="popup">
     <a href="javascript:PopUpHide('create_dashboard')">Hide</a>
     <form method="post">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td><input asp-for="Name" type="text" /></td>
-                <td><input type="submit" value="Create" /></td>
-            </tr>
-        </table>
+        <div>Name</div>
+        <div><input asp-for="Name" type="text" /></div>
+        <div><input type="submit" class="btn btn-primary" value="Create" /></div>
     </form>
 </div>

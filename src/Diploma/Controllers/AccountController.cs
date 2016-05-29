@@ -124,15 +124,23 @@ namespace Diploma.Controllers
                 CreateDate = System.DateTime.Now,
             };
 
-            /*if (RegisteredUser.Role == "Student")
+            if (RegisteredUser.Role == "Student")
             {
-                var Student = new Student()
+                var group = _context.Groups.FirstOrDefault(t => t.GroupName == RegisteredUser.Group);
+                if (group != null)
                 {
-                    StudentCard = RegisteredUser.StudentCard,
-                    UserId = user.Id
-                };
-                user.Student = Student;
-                _context.Students.Add(Student);
+                    var Student = new Student()
+                    {
+                        StudentCard = RegisteredUser.StudentCard,
+                        Group = group,
+                        GroupId = group.GroupId,
+                        User = user,
+                        UserId = user.Id
+                    };
+                    user.Student = Student;
+                    _context.Students.Add(Student);
+                }
+                
             }
             else
             {
@@ -142,8 +150,38 @@ namespace Diploma.Controllers
                 };
                 user.Teacher = Teacher;
                 _context.Teachers.Add(Teacher);
+                foreach (var g in RegisteredUser.Groups)
+                {
+                    var group = _context.Groups.FirstOrDefault(t => t.GroupName == g);
+                    if (group != null)
+                    {
+                        var T = new TeacherGroup()
+                        {
+                            Group = group,
+                            GroupId = group.GroupId,
+                            Teacher = Teacher,
+                            TeacherId = Teacher.TeacherId
+                        };
+                        _context.TeacherGroup.Add(T);
+                    }
+                }
+                foreach (var sub in RegisteredUser.Subjects)
+                {
+                    var subj = _context.Subjects.FirstOrDefault(t => t.Name == sub);
+                    if (subj != null)
+                    {
+                        var T = new SubjectTeacher()
+                        {
+                            Subject = subj,
+                            SubjectId = subj.SubjectId,
+                            Teacher = Teacher,
+                            TeacherId = Teacher.TeacherId
+                        };
+                        _context.SubjectTeacher.Add(T);
+                    }
+                }
             }
-            
+
             if (RegisteredUser.Avatar != null)
             {
                 string nameForAvatar = user.Id + '.' + GetFileName(RegisteredUser.Avatar.ContentDisposition)[1];
@@ -151,7 +189,7 @@ namespace Diploma.Controllers
                 RegisteredUser.Avatar.SaveAs(pathForAvatar);
                 user.Avatar = nameForAvatar.ToString();
             }
-                        
+
             var success = await _userManager.CreateAsync(user, RegisteredUser.Password);
             var result = await _userManager.AddToRoleAsync(user, RegisteredUser.Role);
             if (success.Succeeded && result.Succeeded)
@@ -159,7 +197,7 @@ namespace Diploma.Controllers
                 SendConfirmationEmail(user);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
-            }*/
+            }
             return View(RegisteredUser);
         }
 

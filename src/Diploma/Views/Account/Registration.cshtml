@@ -13,7 +13,7 @@
         <input asp-for="Username" type="text" />
     </div>
     <div>
-        <label asp-for="Name"></label>
+        <label asp-for="Name" asp-validation-for="Name"></label>
         <input asp-for="Name" type="text" />
     </div>
     <div>
@@ -61,14 +61,19 @@
         </select>
     </div>   
     
-    <div id="ForStudents" style="display:none">
+    <div id="ForStudents">
         <div>
             <label asp-for="Group"></label>
-            <input asp-for="Group" />
+            <select asp-for="Group">
+                @foreach(var group in ViewBag.Groups)
+                {
+                    <option>@group</option>
+                }
+            </select>
         </div>
         <div>
             <label asp-for="StudentCard"></label>
-            <input asp-for="StudentCard" />
+            <input asp-for="StudentCard" placeholder="AA00000000" style="text-transform: uppercase;" />
         </div>
     </div>
     @*<div>
@@ -94,14 +99,33 @@
 </form>
 <script>
     $('#Role').change(function () {
-        if ($(this).val() == 'Student'){
+        if ($(this).val() == 'Student') {
             $('#ForStudents').css('display', 'block');
             $('#ForTeachers').css('display', 'none');
-        }            
-        else if ($(this).val() == 'Teacher'){
+        }
+        else if ($(this).val() == 'Teacher') {
             $('#ForStudents').css('display', 'none');
             $('#ForTeachers').css('display', 'block');
-        }            
+        }
         else return true
-    })
+    });
+    $('#StudentCard').keydown(function (event) {
+        if ($(this).val().length >= 10)
+            return (event.which == 8 || event.which == 46 || event.which == 39 || event.which == 37);
+        else
+            if ($(this).val().length >= 2)
+                return ((event.which >= 48 && event.which <= 57) || (event.which >= 96 && event.which <= 105) || (event.which == 8 || event.which == 46 || event.which == 39 || event.which == 37));
+            else
+                return ((event.which >= 65 && event.which <= 90) || (event.which == 8 || event.which == 46 || event.which == 39 || event.which == 37))
+
+    });
+    //function stud_valid(event) {
+    //    if (document.getElementById('stud').value.length >= 10)
+    //        return (event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 39 || event.keyCode == 37);
+    //    else
+    //        if (document.getElementById('stud').value.length >= 2)
+    //            return ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || (event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 39 || event.keyCode == 37));
+    //        else
+    //            return ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 39 || event.keyCode == 37));
+    //}
 </script>
