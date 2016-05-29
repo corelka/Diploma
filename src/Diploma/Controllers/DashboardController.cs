@@ -5,6 +5,8 @@ using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Diploma.Controllers
@@ -26,18 +28,29 @@ namespace Diploma.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDashboard(ViewModels.DashboardViewModel dashboard)
+        public Dashboard CreateDashboard([FromBody]ViewModels.DashboardViewModel dashboard)
         {
-            Dashboard NewDash = new Dashboard();
+            try {
+                Dashboard NewDash = new Dashboard();
 
-            NewDash.Created = DateTime.Now;
-            NewDash.UserName = User.Identity.Name;
-            NewDash.Name = dashboard.Name;
+                NewDash.Created = DateTime.Now;
+                NewDash.UserName = User.Identity.Name;
+                NewDash.Name = dashboard.Name;
 
-            _context.Dashboards.Add(NewDash);
-            _context.SaveChanges();
+                _context.Dashboards.Add(NewDash);
+                _context.SaveChanges();
+                //HttpContentExtensions.CreateXmlSerializable
+                //HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
+                //{
+                //    Content = new HttpContent().,
 
-            return RedirectToAction("Index", "Home");
+                //};
+                return NewDash;
+            }
+            catch
+            {
+                return null;//new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }            
         }
 
         [HttpGet]

@@ -37,7 +37,7 @@ namespace Diploma.Controllers
 
         [Authorize]
         [HttpPost]
-        public HttpResponseMessage DeleteEvent(ViewModels.CreateEventViewModel _event)
+        public HttpResponseMessage DeleteEvent([FromBody]ViewModels.CreateEventViewModel _event)
         {
             var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name && 
                                                         t.start == Convert.ToDateTime(_event.start,new CultureInfo("en-US")) && 
@@ -55,9 +55,12 @@ namespace Diploma.Controllers
         [HttpPost]
         public HttpResponseMessage ChangeEvent([FromBody]ViewModels.ChangeEventViewModel _event)
         {
-            var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name &&
-                                                        t.title == _event.title &&
-                                                        t.start == Convert.ToDateTime(_event.start, new CultureInfo("en-US")) &&
+            var ev = _context.Events.FirstOrDefault(t => t.UserName == User.Identity.Name 
+                                                        &&
+                                                        t.title == _event.title 
+                                                        &&
+                                                        t.start == Convert.ToDateTime(_event.start, new CultureInfo("en-US"))
+                                                        &&
                                                         t.end == Convert.ToDateTime(_event.end, new CultureInfo("en-US")));
             if (ev != null)
             {
@@ -148,7 +151,7 @@ namespace Diploma.Controllers
         [Authorize]
         [HttpPost]
 
-        public HttpResponseMessage CreateEvent(ViewModels.CreateEventViewModel createEvent)
+        public HttpResponseMessage CreateEvent([FromBody]ViewModels.CreateEventViewModel createEvent)
         {
             try
             {

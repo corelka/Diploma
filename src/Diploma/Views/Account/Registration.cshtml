@@ -44,14 +44,64 @@
         <label>Avatar</label>
         <input type="file" asp-for="Avatar" />
     </div>
-    <div>
-        <label asp-for="Group"></label>
-        <input asp-for="Group" />
-    </div>    
-    <div>
-        <label asp-for="StudentCard"></label>
-        <input asp-for="StudentCard" />
+
+    
+    <div id="ForTeachers" style="display:none">
+        <select multiple asp-for="Groups">
+            @foreach (var group in ViewBag.Groups)
+            {
+                <option>@group</option>
+            }     
+        </select>
+        <select multiple asp-for="Subjects">
+            @foreach (var sub in ViewBag.Subjects)
+            {
+                <option>@sub</option>
+            }
+        </select>
+    </div>   
+    
+    <div id="ForStudents" style="display:none">
+        <div>
+            <label asp-for="Group"></label>
+            <input asp-for="Group" />
+        </div>
+        <div>
+            <label asp-for="StudentCard"></label>
+            <input asp-for="StudentCard" />
+        </div>
     </div>
+    @*<div>
+        <select multiple asp-for="Subjects">
+            @foreach (var sub in ViewBag.Subjects)
+            {
+                <option>@sub</option>
+            }
+        </select>
+    </div>*@
+
+
+
+
+
+
+
+
+
+    
         
     <input type="submit" value="Register" />
 </form>
+<script>
+    $('#Role').change(function () {
+        if ($(this).val() == 'Student'){
+            $('#ForStudents').css('display', 'block');
+            $('#ForTeachers').css('display', 'none');
+        }            
+        else if ($(this).val() == 'Teacher'){
+            $('#ForStudents').css('display', 'none');
+            $('#ForTeachers').css('display', 'block');
+        }            
+        else return true
+    })
+</script>

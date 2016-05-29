@@ -10,6 +10,11 @@ namespace Diploma.ViewModels
 {
     public class RegistrationViewModel
     {
+        public RegistrationViewModel()
+        {
+            Groups = new HashSet<string>();
+            Subjects = new HashSet<string>();
+        }
         [Required]
         public string Username { get; set; }
         [Required]
@@ -26,6 +31,10 @@ namespace Diploma.ViewModels
         public string Group { get; set; }
         
         public string StudentCard { get; set;}
+
+        public ICollection<string> Groups { get; set; }
+
+        public ICollection<string> Subjects { get; set; }
 
         public IFormFile Avatar { get; set; }
     }

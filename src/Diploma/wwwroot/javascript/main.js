@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    PopUpHide();
+   // PopUpHide();
     /*$('#datetimepicker1').datepicker();({
         language: 'en',
         pick12HourFormat: true
@@ -9,16 +9,31 @@
 
     });*/
     $('#create_event_sub').click(function () {
+        var p = $('#create_event').serialize();
+        console.log($('#create_event'));
+        var req = {        
+            title: $('#title').val(),
+            allDay: $('#allDay').val(),
+            start: $('#start').val(),
+            end: $('#end').val(),
+            url: $('#url').val(),
+            editable: $('#editable').val()
+        };
+        console.log(JSON.stringify(req));
+        console.log($('#create_event').serialize());
         $.ajax({
             url: "/CalendarEvent/CreateEvent",
             type: "POST",
             contentType: 'application/json',
-            data: $('#create_event').serialize(),
+            data: JSON.stringify(req),
             success: function (data) {
                 if (data.StatusCode != 200) {
                     alert('fail!');
                 }
-                else alert('success');
+                else {
+                    alert('success');
+                    $('#calendar').fullCalendar('refetchEvents', event._id);
+                }
             },
             fail: function () {
                 alert('fail!');
@@ -35,7 +50,22 @@
         //    }
         //});
     });
-    $('.datetimepicker').datetimepicker({ language: 'ru' });
+    $('.datetimepicker').datetimepicker({
+        //useCurrent: true,
+        showClose: true,
+        ignoreReadonly: true,
+        //defaultDate: moment()
+        //format: 'LT',
+        //locale: 'ru',
+        showTodayButton: true
+    });
+    $('#DateTimeStart').on("dp.change", function (e) {
+        $('#DateTimeEnd').data("DateTimePicker").minDate(e.date.add(1, 'h'));
+
+    });
+    $('#DateTimeEnd').on("dp.change", function (e) {
+        $('#DateTimeStart').data("DateTimePicker").maxDate(e.date.add(1, 'h'));
+    });
     var temp_event = {};
     $('#calendar').fullCalendar({
         height: 650,
@@ -47,13 +77,32 @@
         eventRender: function(event, element) {
             element.append( "<span class='closeon'>X</span>" );
             element.find(".closeon").click(function () {
-                var req = JSON.stringify(event,["title","start","end"]);
-                console.log(req);
-                $.post("/CalendarEvent/DeleteEvent", req, function (data) {
-                    if (data.StatusCode != 200) {
-                        alert("success!");
-                        $('#calendar').fullCalendar('removeEvents', event._id);
-                    }                    
+                var req = {
+                    title: event.title,
+                    allDay: event.allDay,
+                    start: event.start.format(),
+                    end: event.end.format(),
+                    url: event.url,
+                    editable: event.editable
+                };
+                console.log(JSON.stringify(req));
+                $.ajax({
+                    url: "/CalendarEvent/DeleteEvent",
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify(req),
+                    success: function (data) {
+                        if (data.StatusCode != 200) {
+                            alert('fail!');
+                        }
+                        else {
+                            alert("success!");
+                            $('#calendar').fullCalendar('removeEvents', event._id);
+                        }    
+                    },
+                    fail: function () {
+                        alert('fail!');
+                    }
                 });
             });
         },
@@ -110,6 +159,7 @@
         },
 
         eventDrop: function (event, delta, revertFunc) {
+            console.log(event.end.toString());
             var req = {
                 title: event.title,
                 newStartDate: event.start.format(),
@@ -117,6 +167,7 @@
                 start: temp_event.start.format(),
                 end: temp_event.end.format()
             };
+            console.log(JSON.stringify(req));
             $.ajax({
                 url: "/CalendarEvent/ChangeEvent",
                 type: "POST",
@@ -196,6 +247,23 @@
     ]*/
     });
 });
+
+
+
+$('.mdl-layout__drawer-button').on("click", function () {
+    $('body').css('overflow', 'hidden');
+});
+
+$('body').on("mouseup", function () {
+    if ($(this).css('overflow') == 'hidden') {
+        $('body').css('overflow', '');
+    }
+});
+
+
+
+
+
 function PopUpShow(window,clear) {
     console.log(window);
     $(".overlay").show();
@@ -248,3 +316,6 @@ $(function () {
         PopUpShow("window_change",false);
     });
 });
+
+
+

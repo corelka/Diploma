@@ -23,6 +23,10 @@ namespace Diploma.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Home", "Admin");
+                }
                 var dashboards = _context.Dashboards.Where(t => t.UserName == User.Identity.Name).ToList();
                 return View(dashboards);
             }

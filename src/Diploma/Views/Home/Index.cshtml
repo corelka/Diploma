@@ -7,7 +7,7 @@
     
 }
 
-<h1>Hello worlde!</h1>
+@*<h1>Hello worlde!</h1>
 @if(User.IsInRole("Admin"))
 {
     <h1>Admin</h1>
@@ -24,21 +24,18 @@ else
     }
 }
 <a asp-controller="Calendar" asp-action="Overview">Calendar</a>
-<a asp-controller="Dashboard" asp-action="CreateDashboard">Create new one</a>
-<a asp-action="Notes">Notes</a>
-<ul>
-    @foreach (var dashboard in Model)
-    {
-        <li><a href="/Dashboard/Overview/@dashboard.Id">@dashboard.Name</a></li>
-    }
-    </ul>
 
-
-<div class="form-group">
-    <div class="input-group date datetimepicker">
-        <input type="text" class="form-control" />
-        <span class="input-group-addon">
-            <span class="glyphicon-calendar glyphicon"></span>
-        </span>
-    </div>
+<a asp-action="Notes">Notes</a>*@
+<a href="javascript:PopUpShow('create_dashboard',true)">Create new one</a>   
+ 
+<div class="overlay">
+    @Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel())
 </div>
+<div class="grid"></div>
+
+<script src="~/lib/masonry/dist/masonry.pkgd.js"></script>
+<script src="~/javascript/MasonryDashboards.js"></script>
+<script>
+    var p=@Html.Raw(Json.Serialize(Model));
+    CreateMasonry(p);
+</script>

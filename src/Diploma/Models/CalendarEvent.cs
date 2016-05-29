@@ -15,8 +15,14 @@ namespace Diploma.Models
             UserName = _UserName;
             title = createEvent.title;
             allDay = createEvent.allDay;
+            
             start = Convert.ToDateTime(createEvent.start, new CultureInfo("en-US"));
             end = Convert.ToDateTime(createEvent.end, new CultureInfo("en-US"));
+            if (allDay == true)
+            {
+                start = new DateTime(start.Year, start.Month, start.Day, 0, 0, 0);
+                end = new DateTime(end.Year, end.Month, end.Day, 0, 0, 0);
+            }
             url = createEvent.url;
             durationEditable = createEvent.editable;
             startEditable = createEvent.editable;

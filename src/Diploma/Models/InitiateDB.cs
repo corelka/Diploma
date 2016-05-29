@@ -73,6 +73,15 @@ namespace Diploma.Models
 
             if (await _userManager.FindByEmailAsync("nik.korneychuk@gmail.com") == null)
             {
+                var admin = new User()
+                {
+                    Email = "Admin@gmail.com",
+                    UserName = "Admin"
+                };
+                _userManager.CreateAsync(admin, "Qwerty1!").GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(admin, "Admin").GetAwaiter().GetResult();
+                _context.SaveChanges();
+                
                 var t1 = AddTeacher("Teacher1");
                 var t2 = AddTeacher("Teacher2");
                 var t3 = AddTeacher("Teacher3");
@@ -276,6 +285,9 @@ namespace Diploma.Models
                 {
                     UserName = t1.UserName,
                     title = "newEvent!",
+                    editable = true,
+                    durationEditable = true,
+                    startEditable = true,
                     start = new DateTime(2016, 5, 25, 8, 0, 0),
                     end = new DateTime(2016, 5, 25, 9, 45, 0)
                 };
@@ -283,6 +295,9 @@ namespace Diploma.Models
                 var eve2 = new CalendarEvent()
                 {
                     UserName = t1.UserName,
+                    editable = true,
+                    durationEditable = true,
+                    startEditable = true,
                     title = "newEvent!",                    
                     start = new DateTime(2016, 5, 25, 10, 0, 0),
                     end = new DateTime(2016, 5, 25, 11, 20, 0)

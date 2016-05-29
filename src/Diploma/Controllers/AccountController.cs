@@ -80,14 +80,33 @@ namespace Diploma.Controllers
         [HttpGet]
         public IActionResult Registration()
         {
+            
+            var Subjects = _context.Subjects.ToList();
+            List<string> ViewSubj = new List<string>();
+            foreach (var Sub in Subjects)
+            {
+                    ViewSubj.Add(Sub.Name);
+            }
+            ViewBag.Subjects = ViewSubj;
+
             var Roles = _context.Roles.ToList();
             List<string> ViewRoles = new List<string>();
             foreach (var Role in Roles)
-            {   
-                if(Role.Name != "Admin")
+            {
+                if (Role.Name != "Admin")
                     ViewRoles.Add(Role.Name);
             }
             ViewBag.Roles = ViewRoles;
+
+
+            var Groups = _context.Groups.ToList();
+            List<string> ViewGroups = new List<string>();
+            foreach (var Group in Groups)
+            {
+                    ViewGroups.Add(Group.GroupName);
+            }
+            ViewBag.Groups = ViewGroups;
+            
             return View();
         }
 
@@ -105,7 +124,7 @@ namespace Diploma.Controllers
                 CreateDate = System.DateTime.Now,
             };
 
-            if (RegisteredUser.Role == "Student")
+            /*if (RegisteredUser.Role == "Student")
             {
                 var Student = new Student()
                 {
@@ -140,7 +159,7 @@ namespace Diploma.Controllers
                 SendConfirmationEmail(user);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
-            }
+            }*/
             return View(RegisteredUser);
         }
 

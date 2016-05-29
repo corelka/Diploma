@@ -12,19 +12,29 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
-    
 
+    @*<script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
+    
+    
+    
     <link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
     <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/lib/mdl/material.min.css" rel="stylesheet" />
+    <link href="~/stylesheet/layoutstylesheet.css" rel="stylesheet" />
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />*@
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
     <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
     
     
     
    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>--> 
     <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
-    <style>        
+    <style>       
+            input[readonly="readonly"]:hover{
+                cursor:pointer;
+            } 
           .table {
               list-style-type: none; 
               margin: 0; 
@@ -40,6 +50,8 @@
               width: 120px;
           }
           .popup {
+              display: none;
+              position: relative;
               margin:40px auto 0px auto;
               width:730px;
               height: auto;
@@ -67,7 +79,72 @@
     </script>-->
 </head>
 <body>
-    <a asp-controller="Home" asp-action="Index">Home Page</a>
+
+    <div>
+        <ul class="upper-menu clearfix">
+            <li class="mdl-js-layout mdl-layout" id="access">
+                <div class="mdl-layout__drawer">
+
+                    <span class="mdl-layout-title">
+                        <img src="~/img/asap_layout.png" class="asap img-responsive" alt="ASAP">
+                    </span>
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" asp-controller="Home" asp-action="Index">
+                            <img src="~/img/dashboard24.png" />
+                            Dashboards
+                        </a>
+                        <a class="mdl-navigation__link" asp-controller="Calendar" asp-action="Overview">
+                            <img src="~/img/calendar24.png" />
+                            Calendar
+                        </a>
+                        <a class="mdl-navigation__link" href="">
+                            <img src="~/img/schedule24.png" />
+                            Timetable
+                        </a>
+                        <a class="mdl-navigation__link" href="">
+                            <img src="~/img/contacts24.png" />
+                            Contact us
+                        </a>
+                    </nav>
+                </div>
+                <div class="mdl-layout__drawer-button">
+                    <img src="~/img/menu24.png" />
+                </div>
+            </li>
+
+
+
+
+
+            <!-- <li><a href="#"><img src="menu.png"  id="menu" alt="menu"></a>
+                  <ul class="slide-menu ">
+                      <li><a href="#"><img src="dashboard.png" alt="">Dashboards</a></li>
+                      <li><a href="#"><img src="calendar.png" alt="">Calendar</a></li>
+                      <li><a href="#"><img src="schedule.png" alt="">Timetable</a></li>
+                      <li><a href="#"><img src="contacts.png" alt="">Contact us</a></li>
+                  </ul>
+            </li> -->
+            <!-- <li><a href="#"><img src="ASAP.png" class="asap img-responsive" alt="ASAP"></a></li> -->
+            <li>
+                <a href="#">
+                    <img src="~/img/account.png" />
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="#">Go to my profile</a></li>
+                    <li><a asp-controller="Account" asp-action="ChangeProfile">Edit profile</a></li>
+                    <li><a asp-controller="Account" asp-action="Logout">Exit</a></li>
+                </ul>
+            </li>
+        </ul>
+
+
+
+
+
+
+
+
+    @*<a asp-controller="Home" asp-action="Index">Home Page</a>
     <br>
     <br>
     @if (User.Identity.IsAuthenticated)
@@ -91,16 +168,36 @@
             <a asp-controller="Account" asp-action="Register">Register</a>
         </div>
     }
-    <br>
+    <br>*@
 
-    <div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="main">
         @RenderBody()
     </div>
     
-    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
     
-
     
+    
+    
+    
+    
+    
+    
+    
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>    
     <script src="~/javascript/main.js"></script>
+    <script src="~/lib/mdl/material.min.js"></script>
+
+        <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    </div>
 </body>
 </html>
