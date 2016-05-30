@@ -18,7 +18,7 @@ function CreateMasonry(p) {
     var items = [];
     p.forEach(function (item) {
         items.push(getItemElement(item));
-        console.log(getItemElement(item));
+        //console.log(getItemElement(item));
     });
     $grid.append($(items)).masonry('appended', $(items));
 };
@@ -54,24 +54,24 @@ function getItemElement(p) {
 }
 
 $('#create_dashboard > form').submit(function (event) {
-    alert('hello!');
+    //alert('hello!');
     var req = {
         Name: $('#Name').val()
     };
 
-    console.log(JSON.stringify(req));
+    //console.log(JSON.stringify(req));
     $.ajax({
         url: "/Dashboard/CreateDashboard",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(req),
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             if (data == null) {
-                alert('fail!');
+                //alert('fail!');
             }
             else {
-                alert('success');
+                //alert('success');
                 PopUpHide();
                 var item = getItemElement(data);
                 $grid.append($(item)).masonry('appended', $(item));
@@ -79,7 +79,7 @@ $('#create_dashboard > form').submit(function (event) {
                 }
             },
         fail: function () {
-            alert('fail!');
+            //alert('fail!');
             }
     });
     event.preventDefault();

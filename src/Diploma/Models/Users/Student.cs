@@ -20,5 +20,6 @@ namespace Diploma.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+        public int Course { get; set; }
     }
 }

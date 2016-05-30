@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Diploma.ViewModels.LectureNoteViewModel
+
+
+    @using (Html.BeginForm("CreateNote", "LectureNotes", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    {
+        <input type="text" asp-for="@Model.Name"/>
+        <input type="file" asp-for="@Model.Attachment"/>
+        <select asp-for="@Model.Subject">
+            @foreach (var t in ViewBag.Subs)
+            {
+                <option>@t</option>
+            }
+        </select>
+        <select asp-for="@Model.Course">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <input type="submit" value="Create"/>
+    }

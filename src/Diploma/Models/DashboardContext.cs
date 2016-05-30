@@ -25,6 +25,7 @@ namespace Diploma.Models
         public DbSet<TeacherGroup> TeacherGroup { get; set; }
         public DbSet<UserRoles> Roles { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
+        public DbSet<LectureNotes> LecctureNotes { get; set; }
 
 
         public DashboardContext()

@@ -10,7 +10,7 @@
     });*/
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
-        console.log($('#create_event'));
+        //console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),
             allDay: $('#allDay').val(),
@@ -19,8 +19,8 @@
             url: $('#url').val(),
             editable: $('#editable').val()
         };
-        console.log(JSON.stringify(req));
-        console.log($('#create_event').serialize());
+        //console.log(JSON.stringify(req));
+        //console.log($('#create_event').serialize());
         $.ajax({
             url: "/CalendarEvent/CreateEvent",
             type: "POST",
@@ -28,15 +28,15 @@
             data: JSON.stringify(req),
             success: function (data) {
                 if (data.StatusCode != 200) {
-                    alert('fail!');
+                    //alert('fail!');
                 }
                 else {
-                    alert('success');
+                    //alert('success');
                     $('#calendar').fullCalendar('refetchEvents', event._id);
                 }
             },
             fail: function () {
-                alert('fail!');
+                //alert('fail!');
             }
         });
         PopUpHide();
@@ -85,7 +85,7 @@
                     url: event.url,
                     editable: event.editable
                 };
-                console.log(JSON.stringify(req));
+                //console.log(JSON.stringify(req));
                 $.ajax({
                     url: "/CalendarEvent/DeleteEvent",
                     type: "POST",
@@ -93,15 +93,15 @@
                     data: JSON.stringify(req),
                     success: function (data) {
                         if (data.StatusCode != 200) {
-                            alert('fail!');
+                            //alert('fail!');
                         }
                         else {
-                            alert("success!");
+                            //alert("success!");
                             $('#calendar').fullCalendar('removeEvents', event._id);
                         }    
                     },
                     fail: function () {
-                        alert('fail!');
+                        //alert('fail!');
                     }
                 });
             });
@@ -132,13 +132,13 @@
                 data: JSON.stringify(req),
                 success: function (data) {
                     if (data.StatusCode != 200) {
-                        alert('fail!');
+                        //alert('fail!');
                         revertFunc();
                     }
                     temp_event = {};
                 },
                 fail: function () {
-                    alert('fail!');
+                    //alert('fail!');
                     temp_event = {};
                     revertFunc();
                 }
@@ -159,7 +159,7 @@
         },
 
         eventDrop: function (event, delta, revertFunc) {
-            console.log(event.end.toString());
+            //console.log(event.end.toString());
             var req = {
                 title: event.title,
                 newStartDate: event.start.format(),
@@ -167,7 +167,7 @@
                 start: temp_event.start.format(),
                 end: temp_event.end.format()
             };
-            console.log(JSON.stringify(req));
+            //console.log(JSON.stringify(req));
             $.ajax({
                 url: "/CalendarEvent/ChangeEvent",
                 type: "POST",
@@ -175,13 +175,13 @@
                 data: JSON.stringify(req),
                 success: function (data) {
                     if (data.StatusCode != 200) {
-                        alert('fail!');
+                        //alert('fail!');
                         revertFunc();
                     }
                     temp_event = {};
                 },
                 fail: function () {
-                    alert('fail!');
+                    //alert('fail!');
                     temp_event = {};
                     revertFunc();
                 }
@@ -265,7 +265,7 @@ $('body').on("mouseup", function () {
 
 
 function PopUpShow(window,clear) {
-    console.log(window);
+    //console.log(window);
     $(".overlay").show();
     $('#' + window).show();
     if (Boolean(clear))
@@ -280,8 +280,8 @@ $(function () {
         drop: function (event, ui) {
             var prev = $(ui.draggable).parent().attr("id");
             var next = $(this).attr("id");
-            console.log(prev);
-            console.log(next);
+            //console.log(prev);
+            //console.log(next);
             $(ui.draggable).detach().css({ top: 0, left: 0 }).appendTo(this);
             if (prev != next)
                 $.post(

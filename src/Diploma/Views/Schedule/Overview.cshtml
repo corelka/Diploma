@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Diploma.ViewModels.ScheduleVIewModel>
+@foreach(var mod in Model)
+{
+    <p>@mod.Name</p>
+    <p>@mod.Start</p>
+    <p>@mod.End</p>
+    <p>@mod.Teacher</p>
+    <p>@mod.Group</p>
+}

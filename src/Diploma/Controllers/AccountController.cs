@@ -16,7 +16,7 @@ namespace Diploma.Controllers
 {
     public class AccountController : Controller
     {
-        const string WebSite = "localhost:5000";
+        public const string WebSite = "http://localhost:5000";
         private DashboardContext _context;
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
@@ -89,7 +89,7 @@ namespace Diploma.Controllers
             }
             ViewBag.Subjects = ViewSubj;
 
-            var Roles = _context.Roles.ToList();
+            var Roles = _context.Roles.ToList().OrderBy(t=>t.Name);
             List<string> ViewRoles = new List<string>();
             foreach (var Role in Roles)
             {
@@ -113,7 +113,7 @@ namespace Diploma.Controllers
         //needs to be checked
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registration(ViewModels.RegistrationViewModel RegisteredUser)
+        public async Task<IActionResult> Registration(RegistrationViewModel RegisteredUser)
         {
             var user = new User()
             {
@@ -215,9 +215,9 @@ namespace Diploma.Controllers
                     code = code
                 }
                 );
-            string message = "Please confirm your account by clicking this link: <a href=\""
-                                               + WebSite + callbackUrl + "\">link</a>";
+            string message = "Please confirm your account by clicking this link: <a href=\"http://" + WebSite + callbackUrl + "\">link</a>";
             string subject = "Confirm your email";
+
             SendEmailAsync(message, subject, user.Email);
         }
 
@@ -246,11 +246,11 @@ namespace Diploma.Controllers
                 string Password = "QSCazx321";
                 var mail = new MailMessage(
                     AppMail,
-                    usermail,
-                    subject,
-                    message
+                    usermail
                     );
-                mail.IsBodyHtml = true;
+                mail.Body = message;
+                mail.Subject = subject;
+                mail.IsBodyHtml = true;               
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 25);
                 smtpClient.Credentials = new NetworkCredential(
                     AppMail, 
@@ -261,7 +261,7 @@ namespace Diploma.Controllers
             });
         }
 
-        private string[] GetFileName(string init)
+        internal static string[] GetFileName(string init)
         {
             string filename_full = init.Substring(init.IndexOf("filename=\""));
             return filename_full.Substring(10, filename_full.Length - 11).Split('.');
