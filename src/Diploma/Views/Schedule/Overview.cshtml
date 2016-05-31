@@ -4,11 +4,22 @@
 @{
 }
 @model IEnumerable<Diploma.ViewModels.ScheduleVIewModel>
-@foreach(var mod in Model)
+<link href="~/stylesheet/styleschedule.css" rel="stylesheet" />
+<section id="cd-timeline" class="cd-container">
+@foreach (var mod in Model)
 {
-    <p>@mod.Name</p>
-    <p>@mod.Start</p>
-    <p>@mod.End</p>
-    <p>@mod.Teacher</p>
-    <p>@mod.Group</p>
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-picture">
+            <img src="~/img/cd-icon-location.svg" alt="Picture"/>
+        </div> <!-- cd-timeline-img -->
+
+        <div class="cd-timeline-content">
+            <h2>@mod.Name</h2>
+            <p>@mod.Teacher</p>
+            <p>@mod.Group</p>
+            <p>@mod.Day</p>
+            <span class="cd-date">@mod.Start - @mod.End</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
 }
+</section> <!-- cd-timeline -->

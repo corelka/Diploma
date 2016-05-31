@@ -8,19 +8,43 @@
         e.preventDefault();
 
     });*/
-    $('#create_dashboard2   ').validator()
+        var timelineBlocks = $('.cd-timeline-block'),
+            offset = 0.8;
+
+        //hide timeline blocks which are outside the viewport
+        hideBlocks(timelineBlocks, offset);
+
+        //on scolling, show/animate timeline blocks when enter the viewport
+        $(window).on('scroll', function(){
+            (!window.requestAnimationFrame) 
+                ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+                : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+        });
+
+        function hideBlocks(blocks, offset) {
+            blocks.each(function(){
+                ( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+            });
+        }
+
+        function showBlocks(blocks, offset) {
+            blocks.each(function(){
+                ( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+            });
+        }
+    $('#create_dashboard').validator()
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
-        //console.log($('#create_event'));
+        console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),
             allDay: $('#allDay').val(),
-            start: $('#start').val(),
-            end: $('#end').val(),
+            start: $('#DateTimeStart').val(),
+            end: $('#DateTimeEnd').val(),
             url: $('#url').val(),
             editable: $('#editable').val()
         };
-        //console.log(JSON.stringify(req));
+        console.log(JSON.stringify(req));
         //console.log($('#create_event').serialize());
         $.ajax({
             url: "/CalendarEvent/CreateEvent",

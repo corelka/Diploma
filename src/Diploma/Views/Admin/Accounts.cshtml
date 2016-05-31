@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{    Layout = "_AdminLayout";
+}
+@model IEnumerable<Diploma.Models.User>
+<a href="/Admin/Home">Home</a>
+
+<table>
+    <tr>
+        <td>
+            Login
+        </td>
+        <td>
+            Name
+        </td>
+        <td>
+            Surname
+        </td>
+        <td>
+            CreateDate
+        </td>
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>
+                @u.UserName
+            </td>
+            <td>
+                @u.Name
+            </td>
+            <td>
+                @u.Surname
+            </td>
+            <td>
+                @u.CreateDate.ToString()
+            </td>
+        </tr>
+    }
+</table>

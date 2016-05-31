@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Diploma.ViewModels.CreateEventViewModel
+<div id="create_event_popup" class="popup">
+    <p class="title">Create New Issue</p>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "create_event"}))
+    {
+        <a href="javascript:PopUpHide('create_event')">Hide</a>
+        <div>
+            <label>Name</label>
+            <input type="text" asp-for="@Model.title" />
+        </div>
+         <div>
+            <label>All Day</label>
+            <input type="checkbox" asp-for="@Model.allDay" />
+         </div>
+            <label>Start Date Time</label>
+          <div>
+            <input type="text" class="datetimepicker" readonly="readonly" id="DateTimeStart" asp-for="@Model.start" />
+          </div>
+            <label>End Date Time</label>
+        <div>
+            <input type="text" class="datetimepicker" readonly="readonly" id="DateTimeEnd" asp-for="@Model.end" />
+        </div>
+            <div>
+                <label>Link (not necessary)</label>
+                <input type="text" asp-for="@Model.url" />
+            </div>
+            <div>
+                <label>Editable</label>
+                <input type="checkbox" asp-for="@Model.editable" />
+            </div>
+            <button class="btn btn-primary" id="create_event_sub">Create</button>
+            //<input type="submit" value="Create" />
+    }
+</div>

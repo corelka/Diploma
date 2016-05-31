@@ -46,7 +46,7 @@ namespace Diploma.Controllers
                                  day = ct.day,
                                  teacher = user.UserName,
                                  gr = g.GroupName
-                             }).ToList();
+                             }).OrderBy(s=>s.day).ThenBy(t=>t.start).ToList();
                 foreach (var s in sched)
                 {
                     CultureInfo ci = new CultureInfo("en-US");
@@ -59,10 +59,11 @@ namespace Diploma.Controllers
                             events.Add(new ScheduleVIewModel()
                             {
                                 Name = s.title,
-                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
-                                End = s.end,
+                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
+                                End = s.end.ToShortTimeString(),
                                 Teacher = s.teacher,
-                                Group = s.gr
+                                Group = s.gr,
+                                Day = s.day
                             });
                         }
                     }
@@ -85,7 +86,7 @@ namespace Diploma.Controllers
                                  day = ct.day,
                                  teacher = te.TeacherId,
                                  gr = g.GroupName
-                             }).ToList();
+                             }).OrderBy(s => s.day).ThenBy(t=>t.start).ToList();
                 foreach (var s in sched)
                 {
                     CultureInfo ci = new CultureInfo("en-US");
@@ -99,10 +100,11 @@ namespace Diploma.Controllers
                             events.Add(new ScheduleVIewModel()
                             {
                                 Name = s.title,
-                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
-                                End = s.end,
+                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
+                                End = s.end.ToShortTimeString(),
                                 Group = s.gr,
-                                Teacher = teacher.User.Name
+                                Teacher = teacher.User.Name,
+                                Day = s.day
                             });
                         }
                     }

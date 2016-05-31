@@ -9,9 +9,10 @@ namespace Diploma.ViewModels
     {
         public int Id;
         public string Name;
-        public DateTime Start;
-        public DateTime End;
+        public string Start;
+        public string End;
         public string Teacher;
         public string Group;
+        public DayOfWeek Day;
     }
 }

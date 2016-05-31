@@ -130,8 +130,8 @@ namespace Diploma.Controllers
                            Teacher = u.UserName,
                            Name = s.Name,          
                            Group = g.GroupName,
-                           Start = tt.StartDateTime,
-                           End = tt.EndDateTime                 
+                           Start = tt.StartDateTime.ToString(),
+                           End = tt.EndDateTime.ToString()                 
                        }).ToList();
             return View(_sched);
         }

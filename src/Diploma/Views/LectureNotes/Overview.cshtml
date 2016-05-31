@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Diploma.Models.LectureNotes>
+@if (User.IsInRole("Teacher"))
+{
+    <a asp-action="CreateNote" asp-controller="LectureNotes">Create new one</a>
+}
+
+@foreach (var note in Model)
+{
+    <p>@note.Name</p>
+    <a href="@note.Attachment">Download</a>
+    
+    <p>@note.Subject.Name</p>
+    <p>@note.Teacher.User.Name @note.Teacher.User.Surname</p>
+}

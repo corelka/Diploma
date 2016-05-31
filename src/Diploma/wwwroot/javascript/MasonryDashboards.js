@@ -66,11 +66,12 @@ function getItemElement(p) {
     return elem;
 }
 
-$('#create_dashboard > form').submit(function (event) {
+$('#create_dashboard').submit(function (event) {
     var req = {
         Name: $('#Name').val()
     };
     if (req.Name != '') {
+        console.log(req);
         $.ajax({
             url: "/Dashboard/CreateDashboard",
             type: "POST",
