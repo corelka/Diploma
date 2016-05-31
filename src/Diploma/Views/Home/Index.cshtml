@@ -6,12 +6,14 @@
     ViewBag.Title = "Home Page";
     
 }
-<a href="javascript:PopUpShow('create_dashboard',true)">Create new one</a>   
- 
 <div class="overlay">
     @Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel())
 </div>
-<div class="grid"></div>
+<div class="grid">
+    <div class="grid-item" style="display:table" onclick="PopUpShow('create_dashboard',true)">
+        <p id="addDashboard" style="display:table-cell; vertical-align:middle; font-size: 80px;">+</p>
+    </div>
+</div>
 
 <script src="~/lib/masonry/dist/masonry.pkgd.js"></script>
 <script src="~/javascript/MasonryDashboards.js"></script>

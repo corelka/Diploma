@@ -4,7 +4,8 @@
 });
 
 $grid.on('click', '.grid-item', function (event) {
-    if (event.target.nodeName != 'A') {
+    if ((event.target.nodeName != 'A') && (event.target.id != 'addDashboard')) {
+        console.log(event.target.id);
         $(this).toggleClass('grid-item--gigante');
         $(this).find('a').toggle();
         $grid.masonry('layout');

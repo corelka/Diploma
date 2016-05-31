@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{    Layout = "_AdminLayout";
+}
+@model IEnumerable<Diploma.ViewModels.ScheduleVIewModel>
+<a href="/Admin/Home">Home</a>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Group</td>
+        <td>Teacher</td>
+        <td>Start</td>
+        <td>End</td>
+        <td>Delete</td>
+    </tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.Name</td>
+            <td>@m.Group</td>
+            <td>@m.Teacher</td>
+            <td>@m.Start.ToString()</td>
+            <td>@m.End.ToString()</td>
+            <td><a href="/Admin/DeleteSubject?=@m.Id">Delete</a></td>
+        </tr>
+    }
+</table>

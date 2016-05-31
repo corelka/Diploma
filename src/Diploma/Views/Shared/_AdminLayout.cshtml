@@ -1,0 +1,171 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <title>@ViewBag.Title</title>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/moment/moment.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+
+    @*<script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>*@
+
+
+
+    @*<link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />*@
+    @*<link href="~/stylesheet/cal.css" rel="stylesheet" />*@
+    <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/mdl/material.min.css" rel="stylesheet" />
+    <link href="~/stylesheet/layoutstylesheet.css" rel="stylesheet" />
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />*@
+    @*<link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />*@
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+    <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
+    <style>
+        input[readonly="readonly"]:hover {
+            cursor: pointer;
+        }
+
+        .table {
+            list-style-type: none;
+            margin: 0;
+            float: left;
+            margin-right: 10px;
+            background: #eee;
+            padding: 5px;
+            width: 143px;
+        }
+
+        .issue {
+            margin: 5px;
+            padding: 5px;
+            width: 120px;
+        }
+
+        .popup {
+            display: none;
+            position: relative;
+            margin: 40px auto 0px auto;
+            width: 30em;
+            height: auto;
+            padding: 10px;
+            background-color: #546E7A;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #000;
+        }
+
+        .overlay {
+            display: none;
+            width: 100%;
+            min-height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: fixed;
+            top: 0px;
+            z-index: 5;
+        }
+
+        .btn-primary {
+            background-color: #37474F;
+            border: none;
+            color: white;
+        }
+
+            .btn-primary:hover,
+            .btn-primary:active,
+            .btn-primary:focus {
+                background-color: #546E7A;
+                border: none;
+            }
+
+        input[type="text"], input[type="password"] {
+            color: black;
+            text-align: center;
+            border: 1px solid #DCEDC8;
+            border-radius: 5px;
+            min-height: 30px;
+            min-width: 200px;
+            background-color: #C8E6C9;
+        }
+
+            input[type="text"]:focus,
+            input[type="password"]:focus {
+                outline: 0;
+                border: 1px solid #80CBC4;
+                background-color: #B2DFDB;
+            }
+    </style>
+    <!--<script>
+
+
+
+    </script>-->
+</head>
+<body>
+
+    <div>
+        <ul class="upper-menu clearfix">
+            <li class="mdl-js-layout mdl-layout" id="access">
+                <div class="mdl-layout__drawer">
+
+                    <span class="mdl-layout-title">
+                        <img src="~/img/asap_layout.png" class="asap img-responsive" alt="ASAP">
+                    </span>
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" asp-controller="Admin" asp-action="Home">
+                            <img src="~/img/dashboard24.png" />
+                            Home
+                        </a>
+                        <a class="mdl-navigation__link" asp-controller="Admin" asp-action="Accounts">
+                            <img src="~/img/calendar24.png" />
+                            Accounts
+                        </a>
+                        <a class="mdl-navigation__link" asp-controller="Admin" asp-action="Groups">
+                            <img src="~/img/schedule24.png" />
+                            Groups
+                        </a>
+                        <a class="mdl-navigation__link" asp-controller="Admin" asp-action="Schedules">
+                            <img src="~/img/contacts24.png" />
+                            Schedules
+                        </a>
+                        <a class="mdl-navigation__link" asp-controller="Admin" asp-action="Subjects">
+                            Subjects
+                        </a>
+                    </nav>
+                </div>
+                <div class="mdl-layout__drawer-button">
+                    <img src="~/img/menu24.png" />
+                </div>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="~/img/account.png" />
+                </a>
+                <ul class="sub-menu">
+                    <li><a asp-controller="Account" asp-action="Logout">Exit</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="main">
+            @RenderBody()
+        </div>
+        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+        <script src="~/javascript/main.js"></script>
+        <script src="~/lib/mdl/material.min.js"></script>
+        <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    </div>
+</body>
+</html>

@@ -7,6 +7,7 @@ namespace Diploma.ViewModels
 {
     public class ScheduleVIewModel
     {
+        public int Id;
         public string Name;
         public DateTime Start;
         public DateTime End;

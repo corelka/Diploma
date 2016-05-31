@@ -29,6 +29,8 @@ namespace Diploma.ViewModels
         public string Password { get; set; }
         [Required]
         public string Group { get; set; }
+
+        public int Course { get; set; }
         
         public string StudentCard { get; set;}
 
