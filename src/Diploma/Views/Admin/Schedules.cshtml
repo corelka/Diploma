@@ -5,6 +5,7 @@
 }
 @model IEnumerable<Diploma.ViewModels.ScheduleVIewModel>
 <a href="/Admin/Home">Home</a>
+<a href="/Admin/CreateSchedule">New One</a>
 <table>
     <tr>
         <td>Name</td>
@@ -22,7 +23,7 @@
             <td>@m.Teacher</td>
             <td>@m.Start.ToString()</td>
             <td>@m.End.ToString()</td>
-            <td><a href="/Admin/DeleteSubject?=@m.Id">Delete</a></td>
+            <td><a href="/Admin/DeleteSchedule?=@m.Id">Delete</a></td>
         </tr>
     }
 </table>

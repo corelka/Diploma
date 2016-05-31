@@ -62,8 +62,20 @@ namespace Diploma.Controllers
             return RedirectToAction("Subjects");
         }
 
+        [HttpGet]
         public ActionResult CreateSubject()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSubject(string SubjectName)
+        {
+            _context.Add(new Subject()
+            {
+                Name = SubjectName
+            });
+            _context.SaveChanges();
             return RedirectToAction("Subjects");
         }
 
@@ -86,8 +98,20 @@ namespace Diploma.Controllers
             return RedirectToAction("Groups");
         }
 
+        [HttpGet]
         public ActionResult CreateGroup()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateGroup(string GroupName)
+        {
+            _context.Add(new Group()
+            {
+                GroupName = GroupName
+            });
+            _context.SaveChanges();
             return RedirectToAction("Groups");
         }
 
@@ -110,6 +134,75 @@ namespace Diploma.Controllers
                            End = tt.EndDateTime                 
                        }).ToList();
             return View(_sched);
+        }
+
+        public ActionResult DeleteSchedule(int Id)
+        {
+            var sched = _context.Schedules.FirstOrDefault(t => t.ScheduleId == Id);
+            if (sched != null)
+            {
+                _context.Schedules.Remove(sched);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Schedules");
+        }
+
+        [HttpGet]
+        public ActionResult CreateSchedule()
+        {
+            ViewBag.Subjects = (from i in _context.Subjects select i.Name).ToList();
+            ViewBag.Groups = (from i in _context.Groups select i.GroupName).ToList();
+            ViewBag.Teachers = (from i in _context.Teachers 
+                               join u in _context.Users on i.UserId equals u.Id
+                               let name = u.UserName
+                               select name).ToList();
+            ViewBag.Time = (from i in _context.TimeTables
+                           let time = i.StartDateTime.ToShortTimeString() + '_' + i.EndDateTime.ToShortTimeString()
+                           select time).ToList();
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateSchedule(ViewModels.CreateScheduleViewModel _sched)
+        {
+            var Schedule = new Schedule()
+            {
+                GroupId = _context.Groups.FirstOrDefault(t => t.GroupName == _sched.Group).GroupId,
+                SubjectId = _context.Subjects.FirstOrDefault(t => t.Name == _sched.Subject).SubjectId,
+                TeacherId = (from i in _context.Teachers
+                             join u in _context.Users on i.UserId equals u.Id
+                             where u.UserName == _sched.Teacher
+                             select i.TeacherId).FirstOrDefault(),
+                TimeTableId = (from i in _context.TimeTables
+                               where i.StartDateTime.ToShortTimeString().Equals(_sched.Time.Split('_')[0])
+                               &&
+                               i.EndDateTime.ToShortTimeString().Equals(_sched.Time.Split('_')[1])
+                               select i.TimeTableId).FirstOrDefault(),
+                day = _sched.Day
+            };
+            _context.Schedules.Add(Schedule);
+            var tg = _context.TeacherGroup.FirstOrDefault(t => t.TeacherId == Schedule.TeacherId && t.GroupId == Schedule.GroupId);
+            if (tg == null)
+            {
+                _context.TeacherGroup.Add(new TeacherGroup()
+                {
+                    GroupId = Schedule.GroupId,
+                    TeacherId = Schedule.TeacherId
+                });
+            }
+
+            var ts = _context.SubjectTeacher.FirstOrDefault(t => t.TeacherId == Schedule.TeacherId && t.SubjectId == Schedule.SubjectId);
+            if(ts == null)
+            {
+                _context.SubjectTeacher.Add(new SubjectTeacher()
+                {
+                    SubjectId = Schedule.SubjectId,
+                    TeacherId = Schedule.TeacherId
+                });
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Schedules");
         }
     }
 }

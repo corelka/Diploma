@@ -8,6 +8,7 @@
         e.preventDefault();
 
     });*/
+    $('#create_dashboard2   ').validator()
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
         //console.log($('#create_event'));
@@ -268,12 +269,17 @@ function PopUpShow(window,clear) {
     //console.log(window);
     $(".overlay").show();
     $('#' + window).show();
-    if (Boolean(clear))
-    $("#" + window + " input[type='text']").val('');
+    if (Boolean(clear)) {
+        $("#" + window + " input[type='text']").val('');
+        $("#" + window).validator('validate');
+    }
+        
+
 }
 function PopUpHide() {
-    $(".overlay").hide();
     $(".popup").hide();
+    $(".overlay").hide();
+    
 }
 $(function () {
     $(".table").droppable({
@@ -321,5 +327,5 @@ $(function () {
 
 $('.overlay').click(function (event) {
     if ($(event.target).hasClass('overlay'))
-        $(this).toggle();
+        PopUpHide();
 });

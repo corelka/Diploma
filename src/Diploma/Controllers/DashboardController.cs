@@ -28,6 +28,17 @@ namespace Diploma.Controllers
         }
 
         [HttpPost]
+        public void DeleteDashboard(int Id)
+        {
+            var dash = _context.Dashboards.FirstOrDefault(t => t.Id == Id);
+            if (dash != null)
+            {
+                _context.Dashboards.Remove(dash);
+                _context.SaveChanges();
+            }
+        }
+
+        [HttpPost]
         public Dashboard CreateDashboard([FromBody]ViewModels.DashboardViewModel dashboard)
         {
             try {

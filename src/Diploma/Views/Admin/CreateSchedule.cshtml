@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{      Layout = "_AdminLayout";
+}
+@model Diploma.ViewModels.CreateScheduleViewModel
+
+<form asp-action="CreateSchedule" asp-controller="Admin" method="post">
+    <div>
+        <label>
+            Subject
+        </label>
+    </div>
+    <div>
+        <select asp-for="@Model.Subject">
+            @foreach(var s in ViewBag.Subjects)
+            {
+                <option>@s</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select asp-for="@Model.Group">
+            @foreach(var s in ViewBag.Groups)
+            {
+                <option>@s</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select asp-for="@Model.Teacher">
+            @foreach (var s in ViewBag.Teachers)
+            {
+                <option>@s</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select asp-for="@Model.Time">
+            @foreach (var s in ViewBag.Time)
+            {
+                <option>@s</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select asp-for="@Model.Day">
+            <option>@DayOfWeek.Sunday</option>
+            <option>@DayOfWeek.Monday</option>
+            <option>@DayOfWeek.Tuesday</option>
+            <option>@DayOfWeek.Wednesday</option>
+            <option>@DayOfWeek.Thursday</option>
+            <option>@DayOfWeek.Friday</option>
+        </select>
+    </div>
+    <input type="submit" value="Create Scedule"/>
+</form>

@@ -4,22 +4,36 @@
 });
 
 $grid.on('click', '.grid-item', function (event) {
-    if ((event.target.nodeName != 'A') && (event.target.id != 'addDashboard')) {
-        console.log(event.target.id);
+    if ((event.target.nodeName!='A')&&(event.target.id != 'addDashboard')) {
         $(this).toggleClass('grid-item--gigante');
         $(this).find('a').toggle();
         $grid.masonry('layout');
     }
-    
+    if (event.target.id == 'deleteDash') {
+        event.preventDefault();
+        console.log(event.target.href);
+        $.ajax({
+            url: event.target.href,
+            type: "POST",
+            contentType: "application/json",
+            success: function (data) {
+                if (data != null) 
+                {
+                    PopUpHide();
+                    $grid.masonry('remove', $(event.target.closest('div'))).masonry('layout');
+                }               
+            },
+            fail: function () {
+                //not needed for now;
+            }
+        });
+    }
 });
-
-
 
 function CreateMasonry(p) {
     var items = [];
     p.forEach(function (item) {
         items.push(getItemElement(item));
-        //console.log(getItemElement(item));
     });
     $grid.append($(items)).masonry('appended', $(items));
 };
@@ -29,23 +43,21 @@ function getItemElement(p) {
     var span_name = document.createElement('span');
         span_name.className = 'spanName';
         $(span_name).append(p.Name);
-
-
     var span_link = document.createElement('span');
         span_link.className = 'spanLink';
-        var link = document.createElement('a');
+    var link = document.createElement('a');
         $(link).attr('href', '/Dashboard/Overview/' + p.Id);
         $(link).css('display', 'none');
         $(link).append('Link!');
-    $(span_link).append(link);
-   
-    
-        
-    //$(elem).append(link);
+        $(span_link).append(link);   
+    var link = document.createElement('a');
+        $(link).attr('id', 'deleteDash');
+        $(link).attr('href', '/Dashboard/DeleteDashboard/' + p.Id);
+        $(link).css('display', 'none');
+        $(link).append('Delete!');
+        $(span_link).append(link);
     $(elem).append(span_name);
     $(elem).append(span_link);
-
-
     var wRand = Math.random();
     var hRand = Math.random();
     var widthClass = wRand > 0.8 ? 'grid-item--width3' : wRand > 0.6 ? 'grid-item--width2' : '';
@@ -55,33 +67,30 @@ function getItemElement(p) {
 }
 
 $('#create_dashboard > form').submit(function (event) {
-    //alert('hello!');
     var req = {
         Name: $('#Name').val()
     };
-
-    //console.log(JSON.stringify(req));
-    $.ajax({
-        url: "/Dashboard/CreateDashboard",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(req),
-        success: function (data) {
-            //console.log(data);
-            if (data == null) {
-                //alert('fail!');
-            }
-            else {
-                //alert('success');
-                PopUpHide();
-                var item = getItemElement(data);
-                $grid.append($(item)).masonry('appended', $(item));
-                //$('#calendar').fullCalendar('refetchEvents', event._id);
+    if (req.Name != '') {
+        $.ajax({
+            url: "/Dashboard/CreateDashboard",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(req),
+            success: function (data) {
+                if (data == null) {
+                }
+                else {
+                    PopUpHide();
+                    var item = getItemElement(data);
+                    $grid.append($(item)).masonry('appended', $(item));
                 }
             },
-        fail: function () {
-            //alert('fail!');
+            fail: function () {
+                //not needed for now;
             }
-    });
+        });
+    }
+    else
+        alert('empty');
     event.preventDefault();
 })
