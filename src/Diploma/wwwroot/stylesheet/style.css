@@ -63,6 +63,51 @@ input[type="text"],input[type="password"]{
     -ms-transform:rotate(360deg);
     -webkit-transform:rotate(360deg);
     }
+
+
+  .btn-primary{
+  background-color: #37474F;
+  border:none;
+  color:white;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus{
+  background-color: #546E7A;
+  border:none;
+}
+
+.alignbutton{
+    display: inline-block;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+  .btn-primary.disabled,
+  .btn-primary[disabled],
+  fieldset[disabled] .btn-primary,
+  .btn-primary.disabled:hover,
+  .btn-primary[disabled]:hover,
+  fieldset[disabled] .btn-primary:hover,
+  .btn-primary.disabled:focus,
+  .btn-primary[disabled]:focus,
+  fieldset[disabled] .btn-primary:focus,
+  .btn-primary.disabled.focus,
+  .btn-primary[disabled].focus,
+  fieldset[disabled] .btn-primary.focus,
+  .btn-primary.disabled:active,
+  .btn-primary[disabled]:active,
+  fieldset[disabled] .btn-primary:active,
+  .btn-primary.disabled.active,
+  .btn-primary[disabled].active,
+  fieldset[disabled] .btn-primary.active{
+      background-color: #90A4AE;
+  }
+  #create_dashboard{
+    padding-top:30px;
+    padding-left:10px;
+    padding-right:10px;
+}
 .asap{
   margin: 0 auto;
   width:35%;

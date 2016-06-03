@@ -8,14 +8,15 @@
 
     <form id="create_dashboard" class="popup" method="post" data-toggle="validator" role="form">
         <div class="form-group">
-            <label class="control-label">
-                Name
-            </label>
-            <input asp-for="Name" class="form-control" type="text" required />
+           <h4>Create new dashboard</h4>
+            <input asp-for="Name" class="form-control" type="text" placeholder="Name of dashboard" required/>
+          
+            
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary alignbutton">Submit</button>
+            <input type="button" class="btn btn-primary alignbutton" onclick="javascript:PopUpHide('create_dashboard')" value="Hide" />
         </div>
-        <a href="javascript:PopUpHide('create_dashboard')">Hide</a>
+       
     </form>
 

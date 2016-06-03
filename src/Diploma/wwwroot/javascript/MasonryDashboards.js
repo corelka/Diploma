@@ -40,24 +40,35 @@ function CreateMasonry(p) {
 
 function getItemElement(p) {
     var elem = document.createElement('div');
-    var span_name = document.createElement('span');
+    var span_name = document.createElement('span');//название
         span_name.className = 'spanName';
         $(span_name).append(p.Name);
-    var span_link = document.createElement('span');
+    var span_link = document.createElement('span');//линк
         span_link.className = 'spanLink';
     var link = document.createElement('a');
         $(link).attr('href', '/Dashboard/Overview/' + p.Id);
+        $(link).addClass('btn btn-primary');
         $(link).css('display', 'none');
-        $(link).append('Link!');
-        $(span_link).append(link);   
-    var link = document.createElement('a');
-        $(link).attr('id', 'deleteDash');
-        $(link).attr('href', '/Dashboard/DeleteDashboard/' + p.Id);
-        $(link).css('display', 'none');
-        $(link).append('Delete!');
+        $(link).append('More..');
         $(span_link).append(link);
+   // var span_delete = document.createElement('span');//удалить
+    //    span_delete.className = 'spanDel';
+    var link = document.createElement('a');
+        
+        $(link).attr('href', '/Dashboard/DeleteDashboard/' + p.Id);
+       
+        $(link).css('display', 'none');
+    var img = document.createElement('img');
+        img.className = 'spanDel';
+        $(img).attr('src', '/img/delete24.png');
+        $(img).attr('id', 'deleteDash');
+        $(link).append(img);
+        $(elem).append(link);
+    //    $(span_delete).append(link);
     $(elem).append(span_name);
     $(elem).append(span_link);
+ //   $(elem).append(span_delete);
+
     var wRand = Math.random();
     var hRand = Math.random();
     var widthClass = wRand > 0.8 ? 'grid-item--width3' : wRand > 0.6 ? 'grid-item--width2' : '';

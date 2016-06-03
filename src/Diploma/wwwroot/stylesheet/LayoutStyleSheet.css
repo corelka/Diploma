@@ -71,8 +71,9 @@ body {
 .upper-menu .sub-menu{
   position: absolute;
   display:none;
+  padding-left: 0;
   z-index: 3;
-  left: -40px;
+  
   top: 32px;
   z-index: 100;
 }
@@ -195,7 +196,9 @@ body {
   background: #e8f5e9;
   max-width: 100%;
 }
-
+div.grid{
+    margin-left:20px;
+}
 /* clearfix */
 .grid:after {
   content: '';
@@ -224,16 +227,35 @@ body {
     width: 100%;
     min-height: 25px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;   
+    line-height: normal;   
+}
 
-      
+.grid-item .spanName{
+    display:inline-block;
+    vertical-align:middle;
+    
+    
 }
 .grid-item  .spanLink{
-    margin-top: 190px;
-    margin-left: 80px;
+    position: absolute;
+    bottom: 25px;
+    right: 15px;
+    max-width: 50%;
     overflow: hidden;
+    text-align:right;
     text-overflow:ellipsis;
+
 }
+
+
+ .grid-item .spanDel {
+        position: absolute;
+        top:10px;
+        right:15px;
+        z-index:1000;
+    }
+
 
 .grid-item  a{
     display: none;
@@ -241,7 +263,7 @@ body {
     text-decoration:none;
 }
 .grid-item:hover a{
-    color: #33691E;
+    color: #F1F8E9;
 }
 
 .grid-item--width2 { width: 320px; font-size: 16px; }
@@ -257,7 +279,7 @@ body {
 }
 .grid-item--gigante {
   width: 320px;
-  height: 360px;
+  height: 300px;
   font-size: 30px;
   background-color: #8BC34A;
   border: 2px solid #7CB342;
@@ -269,4 +291,20 @@ body {
   background: #B2FF59;
   border-color: #CCFF90;
   cursor: pointer;
+}
+
+.grid-item #addDashboard{
+    background-color: #9CCC65;
+}
+.grid-item #addDashboard:hover{
+    background-color: #64DD17;
+}
+
+.jumbotron {
+    background:  url('../img/flower.jpg') no-repeat center center;
+    background-size: cover;
+    text-align:left;
+}
+.addTable{
+    margin-top: 20px;
 }

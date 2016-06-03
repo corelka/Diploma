@@ -8,10 +8,10 @@
 
 @using (Html.BeginForm("CreateTable", "Dashboard", new { Did = Model.Id }, FormMethod.Post))
 {
-    <div>
+    <div class="addTable">
         <label>New Table</label>
-        <input type="text" name="Name"/>
-        <input type="submit" value="Create Table" />
+        <input type="text" name="Name" required/>
+        <input type="submit" class="btn btn-primary" value="Create Table" />
     </div>
 }
 <div class="overlay">
