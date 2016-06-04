@@ -11,9 +11,9 @@ $grid.on('click', '.grid-item', function (event) {
     }
     if (event.target.id == 'deleteDash') {
         event.preventDefault();
-        console.log(event.target.parentNode.href);
+        console.log(event.target.href);
         $.ajax({
-            url: event.target.parentNode.href,
+            url: event.target.href,
             type: "POST",
             contentType: "application/json",
             success: function (data) {
