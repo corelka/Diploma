@@ -6,14 +6,23 @@
 @model IEnumerable<Diploma.Models.LectureNotes>
 @if (User.IsInRole("Teacher"))
 {
-    <a asp-action="CreateNote" asp-controller="LectureNotes">Create new one</a>
+    <input type="button" asp-action="CreateNote" asp-controller="LectureNotes" value="Create new document" class="btn btn-primary addEventCalendar"/>
 }
+<div class="document-to-download-upper">
+  <div class="document-to-download-middle">
+    @foreach (var note in Model)
+    {
 
-@foreach (var note in Model)
-{
-    <p>@note.Name</p>
-    <a href="@note.Attachment">Download</a>
-    
-    <p>@note.Subject.Name</p>
-    <p>@note.Teacher.User.Name @note.Teacher.User.Surname</p>
-}
+        <div class="document-to-download-lower">
+            <p>@note.Name</p>
+            <input type="button" onclick="@note.Attachment" value="Download" class="btn btn-primary" />
+
+            <p>@note.Subject.Name</p>
+            <p>@note.Teacher.User.Name @note.Teacher.User.Surname</p>
+        </div>
+        
+
+
+    }
+</div>
+</div>

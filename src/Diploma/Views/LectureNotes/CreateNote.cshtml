@@ -8,20 +8,25 @@
 
     @using (Html.BeginForm("CreateNote", "LectureNotes", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
-        <input type="text" asp-for="@Model.Name"/>
-        <input type="file" asp-for="@Model.Attachment"/>
-        <select asp-for="@Model.Subject">
+       <div class="upload-form-lectures">
+        <input type="text" class="dashName" placeholder="Document name" required asp-for="@Model.Name"/><br><br><br>
+        <input type="file" class="dashName" asp-for="@Model.Attachment"/><br><br>
+        <div class="multiple-select-block">
+           <select class="form-control" multiple size="4" asp-for="@Model.Subject">
             @foreach (var t in ViewBag.Subs)
             {
                 <option>@t</option>
             }
         </select>
-        <select asp-for="@Model.Course">
+        <select class="form-control" size="4" asp-for="@Model.Course">
             <option>1</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
             <option>5</option>
         </select>
-        <input type="submit" value="Create"/>
+        </div>
+           <br><br>
+        <input type="submit" class="btn btn-primary" value="Upload"/>
+        </div>
     }

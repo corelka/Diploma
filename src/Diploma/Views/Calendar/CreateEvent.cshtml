@@ -5,35 +5,29 @@
 }
 @model Diploma.ViewModels.CreateEventViewModel
 <div id="create_event_popup" class="popup">
-    <p class="title">Create New Issue</p>
+    <h4>Create new event</h4>
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "create_event"}))
     {
-        <a href="javascript:PopUpHide('create_event')">Hide</a>
-        <div>
-            <label>Name</label>
-            <input type="text" asp-for="@Model.title" />
-        </div>
-         <div>
-            <label>All Day</label>
-            <input type="checkbox" asp-for="@Model.allDay" />
-         </div>
-            <label>Start Date Time</label>
-          <div>
-            <input type="text" class="datetimepicker" readonly="readonly" id="DateTimeStart" asp-for="@Model.start" />
-          </div>
-            <label>End Date Time</label>
-        <div>
-            <input type="text" class="datetimepicker" readonly="readonly" id="DateTimeEnd" asp-for="@Model.end" />
-        </div>
-            <div>
-                <label>Link (not necessary)</label>
-                <input type="text" asp-for="@Model.url" />
-            </div>
-            <div>
-                <label>Editable</label>
+        <br>
+        <div class="form-group">
+            <input type="text" class="form-control dashName" asp-for="@Model.title" placeholder="Name of event" required /><br>
+            <input type="text" class="form-control datetimepicker dashName" readonly="readonly" id="DateTimeStart" asp-for="@Model.start" placeholder="Event starts at.." required/><br>
+            <input type="text" class="form-control datetimepicker dashName" readonly="readonly" id="DateTimeEnd" asp-for="@Model.end" placeholder="Event ends at.." required/><br>
+            <input type="text" class="form-control dashName" asp-for="@Model.url" placeholder="Link" /><br>
+            <label>
+                All day event
+                <input type="checkbox" asp-for="@Model.allDay" />
+            </label><br>
+            <label>
+                Editable
                 <input type="checkbox" asp-for="@Model.editable" />
-            </div>
-            <button class="btn btn-primary" id="create_event_sub">Create</button>
+            </label>
+        </div>
+        <div>
+            <button class="btn btn-primary alignbutton" id="create_event_sub">Create</button>
+            <input type="button" class="btn btn-primary alignbutton" onclick="javascript:PopUpHide('create_event')" value="Hide"/>
+            <br><br>
+        </div>
             //<input type="submit" value="Create" />
     }
 </div>

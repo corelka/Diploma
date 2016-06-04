@@ -5,29 +5,20 @@
 
 }
 @model Diploma.ViewModels.ChangeProfileViewModel
-<form method="post">
+<form method="post" >
     @Html.AntiForgeryToken()
-    <div>
-        <label>UserName</label>
-        <input asp-for="@Model.Username" type="text" value="@Model.Username" /> 
-    </div>
-    <div>
-        <label>Name</label>
-        <input asp-for="@Model.Name" type="text" value="@Model.Name" />
-    </div>
-    <div>
-        <label>Surname</label>
-        <input asp-for="@Model.Surname" type="text" value="@Model.Surname" />
-    </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="@Model.Email" type="text" value="@Model.Email" />
+    <div class="update-personal-info">
+        <h4>Update your profile information</h4>
+        <input asp-for="@Model.Username" class="form-control dashName" type="text" value="@Model.Username" placeholder="student" required /> <br>
+        <input asp-for="@Model.Name" type="text" value="@Model.Name" class="form-control dashName" placeholder="John" required/><br>
+        <input asp-for="@Model.Surname" type="text" value="@Model.Surname" class="form-control dashName" placeholder="Brown" required/><br>
+        <input asp-for="@Model.Email" type="text" value="@Model.Email" class="form-control dashName" placeholder="jbrown@yahoo.com" /><br>
         @if(!Model.EmailConfirmed)
         {
-            <div>
-                MAIL IS NOT CONFIRMED YET!
-            </div>
+            <h6>
+                MAIL IS NOT CONFIRMED YET!<br>
+            </h6>
         }
     </div>
-    <input type="submit" value="Change!" />    
+    <input type="submit" class="btn btn-primary" value="Update information" />    
 </form>

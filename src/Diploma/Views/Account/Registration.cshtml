@@ -6,105 +6,95 @@
 }
 @model Diploma.ViewModels.RegistrationViewModel
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" class="registration-form" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" type="text" />
-    </div>
-    <div>
-        <label asp-for="Name" asp-validation-for="Name"></label>
-        <input asp-for="Name" type="text" />
-    </div>
-    <div>
-        <label asp-for="Surname"></label>
-        <input asp-for="Surname" />
-    </div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-    </div>   
-    <div>
-        <select asp-for="Role">
+    <h4>Registration form</h4>
+    <div class="registration-block">
+        <input asp-for="Username" class="form-control dashName" placeholder="Username" type="text" required />
+        <br>
+        <input asp-for="Name" type="text" class="form-control dashName" placeholder="John" required />
+        <br>
+        <input asp-for="Surname" type="text" class="form-control dashName" placeholder="Brown" required />
+        <br>
+        <input asp-for="Email" type="email" class="form-control dashName" placeholder="jbrown@yahoo.com" required />
+        <br>
+        <input type="password" asp-for="Password" class="form-control dashName" placeholder="Password" required />
+        <br>
+        <input type="password" class="form-control dashName" placeholder="Confirm your password" required />
+        <br>
+        <label>Avatar</label>
+        <input type="file" asp-for="Avatar" />
+        <br><br>
+        <select class="form-control dashName" asp-for="Role">
             @foreach (var role in ViewBag.Roles)
             {
                 <option>@role</option>
-            }       
-        </select>     
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input type="password" asp-for="Password"/>
-    </div>
-    <div>
-        <label>Confirm Password</label> 
-        <input type="password"/>
-    </div>
-    <div>
-        <label>Avatar</label>
-        <input type="file" asp-for="Avatar" />
-    </div>
-
-    
-    <div id="ForTeachers" style="display:none">
-        <select multiple asp-for="Groups">
-            @foreach (var group in ViewBag.Groups)
-            {
-                <option>@group</option>
-            }     
-        </select>
-        <select multiple asp-for="Subjects">
-            @foreach (var sub in ViewBag.Subjects)
-            {
-                <option>@sub</option>
             }
-        </select>
-    </div>   
-    
-    <div id="ForStudents">
-        <div>
-            <label asp-for="Group"></label>
-            <select asp-for="Group">
-                @foreach(var group in ViewBag.Groups)
-                {
+        </select> <br><br>
+
+
+
+        <div id="ForTeachers" style="display:none">
+            <select class="form-control dashName" multiple asp-for="Groups">
+                @foreach (var group in ViewBag.Groups)
+            {
                     <option>@group</option>
                 }
             </select>
-        </div>
-        <div>
-            <select asp-for="@Model.Course">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <select class="form-control dashName" multiple asp-for="Subjects">
+                @foreach (var sub in ViewBag.Subjects)
+            {
+                    <option>@sub</option>
+                }
             </select>
         </div>
-        <div>
-            <label asp-for="StudentCard"></label>
-            <input asp-for="StudentCard" placeholder="AA00000000" style="text-transform: uppercase;" />
+
+        <div id="ForStudents">
+            <div>
+                <label asp-for="Group"></label>
+                <select class="form-control dashName" asp-for="Group">
+                    @foreach (var group in ViewBag.Groups)
+                    {
+                        <option>@group</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <select class="form-control dashName" asp-for="@Model.Course">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div>
+                <label asp-for="StudentCard"></label>
+                <input class="form-control dashName" asp-for="StudentCard" placeholder="AA00000000" style="text-transform: uppercase;" />
+            </div>
         </div>
+
+        @*<div>
+                <select multiple asp-for="Subjects">
+                    @foreach (var sub in ViewBag.Subjects)
+                    {
+                        <option>@sub</option>
+                    }
+                </select>
+            </div>*@
+
+
+
+
+
+
+
+
+
+
+
+        <input type="submit" value="Register" class="btn btn-primary"/>
     </div>
-    @*<div>
-        <select multiple asp-for="Subjects">
-            @foreach (var sub in ViewBag.Subjects)
-            {
-                <option>@sub</option>
-            }
-        </select>
-    </div>*@
-
-
-
-
-
-
-
-
-
-    
-        
-    <input type="submit" value="Register" />
 </form>
 <script>
     $('#Role').change(function () {

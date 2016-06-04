@@ -122,9 +122,13 @@ body {
 }
 .mdl-layout__drawer img{
   padding-right: 15px;
+  margin-left:40px;
 }
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   color:white;
+  padding-left:0;
+  text-align:left;
+
 }
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover{
   background-color: #546E7A;
@@ -308,3 +312,133 @@ div.grid{
 .addTable{
     margin-top: 20px;
 }
+
+#calendar{
+    max-width:90%;
+    margin: 0 auto;
+}
+/*calendar table - general*/
+.fc th, .fc td{
+    background-color: #C8E6C9;
+    border: 1px solid #F1F8E9;
+}
+.fc-unthemed .fc-today{
+    background-color: #CCFF90;
+}
+.fc th{
+    background-color: #A5D6A7;
+}
+.addEventCalendar{
+    margin: 5px;
+
+}
+
+.fc-state-default{
+    background-image: -moz-linear-gradient(top, #E8F5E9, #C8E6C9);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E8F5E9), to(#C8E6C9));
+    background-image: -webkit-linear-gradient(top, #E8F5E9, #C8E6C9);
+    background-image: -o-linear-gradient(top, #E8F5E9, #C8E6C9);
+    background-image: linear-gradient(to bottom, #E8F5E9, #C8E6C9);
+}
+
+.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active{
+    z-index:2;
+    background-image:none;
+    background-color:#A5D6A7;
+    border:1px solid #81C784;
+}
+.fc-event{
+    background-color: #8BC34A;
+    border:2px solid #7CB342;
+    }
+.fc-content{
+    text-align:left;
+    padding-left:5px;
+}
+a.fc-more{
+    margin-left: 20px;
+}
+span.closeon{
+    margin-left: 5px;
+}
+.fc-unthemed .fc-popover .fc-header{
+    background-color: #A5D6A7;
+}
+a.fc-more{
+    color:black;
+    text-decoration:none;
+}
+
+
+.alignbutton {
+    display: inline-block;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+  .form-group .dashName{
+      max-width: 75%;
+      box-sizing:border-box;
+      background-color: #A5D6A7;
+      border: 1px solid #81C784;
+      margin: 0 auto;
+  }
+  .form-group #dashName:hover{
+      border:1px solid #80CBC4;
+      background-color:#B2DFDB ;
+  }
+
+  div.update-personal-info{
+      margin: 25px auto;
+      max-width: 50%;
+  }
+  div.upload-form-lectures{
+      max-width:75%;
+      margin: 25px auto;
+  }
+  .upload-form-lectures .multiple-select-block{
+      margin:0 auto;
+  }
+ 
+  div.upload-form-lectures select{
+      margin-right:15px;
+      min-width:100px;    
+  }
+  div.upload-form-lectures select option{
+      background-color: #E8F5E9;
+     
+  }
+  div.upload-form-lectures select option[selected]{
+      background-color: #C8E6C9;
+  }
+  div.document-to-download-upper{
+      display:table;
+      width:100%;
+      border:1px solid white;
+  }
+  div.document-to-download-middle{
+      display:table-row;
+  }
+  div.document-to-download-lower{
+/*    border:1px solid white;*/
+      border:1px solid #F1F8E9;
+      display:table-cell;
+      width:25%;
+      height:25%;
+      margin:5px;
+      font-size:22px;
+      background-color: #A5D6A7;
+  }
+  div.document-to-download-lower p{
+      margin:5px auto;
+      max-width:75%;  
+  }
+  form.registration-form{
+      width:100%;
+      
+  }
+  .registration-block{
+      margin: 25px auto;
+      max-width: 40%;
+  }
+

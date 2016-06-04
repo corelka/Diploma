@@ -24,6 +24,7 @@ body{
 .authorization{
   padding: 0 20px;
 }
+
 @media(min-width: 768px){
   .layout{
     vertical-align: middle;
@@ -36,6 +37,10 @@ body{
   .intro-container{
     width: 700px;
   }
+}
+.regButton{
+    position:relative;
+    bottom: -100px;
 }
 input[type="text"],input[type="password"]{
   color: black;
@@ -77,11 +82,7 @@ input[type="text"],input[type="password"]{
   border:none;
 }
 
-.alignbutton{
-    display: inline-block;
-    margin-right: 25px;
-    margin-left: 25px;
-}
+
 
   .btn-primary.disabled,
   .btn-primary[disabled],
@@ -104,15 +105,21 @@ input[type="text"],input[type="password"]{
       background-color: #90A4AE;
   }
   #create_dashboard{
-    padding-top:30px;
+    padding-top:15px;
     padding-left:10px;
     padding-right:10px;
 }
+  .form-group h4{
+      vertical-align: middle;
+      margin-top: 5px;
+  }
+
 .asap{
   margin: 0 auto;
   width:35%;
   height:35%;
 }
+
     /*.btn-new:focus,
     .btn-new:active:focus,
     .btn-new.active:focus{
