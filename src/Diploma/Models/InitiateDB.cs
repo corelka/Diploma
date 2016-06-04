@@ -71,7 +71,7 @@ namespace Diploma.Models
                 await _roleManager.CreateAsync(new UserRoles("Teacher"));
             }
 
-            if (await _userManager.FindByEmailAsync("nik.korneychuk@gmail.com") == null)
+            if (await _userManager.FindByEmailAsync("Admin@gmail.com") == null)
             {
                 var admin = new User()
                 {
