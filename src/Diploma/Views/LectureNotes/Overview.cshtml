@@ -6,7 +6,7 @@
 @model IEnumerable<Diploma.Models.LectureNotes>
 @if (User.IsInRole("Teacher"))
 {
-    <input type="button" asp-action="CreateNote" asp-controller="LectureNotes" value="Create new document" class="btn btn-primary addEventCalendar"/>
+    <input type="button" onclick="window.location='@Url.Action("CreateNote","LectureNotes")'" value="Create new document" class="btn btn-primary addEventCalendar"/>
 }
 <div class="document-to-download-upper">
   <div class="document-to-download-middle">

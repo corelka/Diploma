@@ -76,7 +76,7 @@
         //});
     });
     $('.datetimepicker').datetimepicker({
-        //useCurrent: true,
+        useCurrent: false,
         showClose: true,
         ignoreReadonly: true,
         //defaultDate: moment()
@@ -293,6 +293,10 @@ function PopUpShow(window,clear) {
     //console.log(window);
     $(".overlay").show();
     $('#' + window).show();
+    if (window === 'create_event_popup') {
+        $('#DateTimeEnd').data("DateTimePicker").minDate('01-01-1900');
+        $('#DateTimeStart').data("DateTimePicker").maxDate('01-01-2200');
+    }
     if (Boolean(clear)) {
         $("#" + window + " input[type='text']").val('');
         $("#" + window).validator('validate');

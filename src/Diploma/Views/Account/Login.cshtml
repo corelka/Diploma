@@ -43,7 +43,7 @@
                         <input asp-controller="Account" asp-action="Registration" type="image" src="~/img/enter.png" value="" class=" btn img-responsive ">
                         <br>                      
                     </form>
-                    <input type="button" class="btn btn-primary regButton" value="Registrate here" /><br>
+                    <input type="button" class="btn btn-primary regButton" value="Registrate here" onclick="window.location='@Url.Action("Registration","Account")'"/><br>
                 </div>
             </div>
         </div>
