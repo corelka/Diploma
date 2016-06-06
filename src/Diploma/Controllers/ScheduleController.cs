@@ -38,36 +38,37 @@ namespace Diploma.Controllers
                              join tt in _context.TimeTables on ct.TimeTableId equals tt.TimeTableId
                              join g in _context.Groups on ct.GroupId equals g.GroupId
                              where ct.TeacherId == user_.TeacherId
-                             select new
+                             select new ScheduleVIewModel()
                              {
-                                 title = sub.Name,
-                                 start = tt.StartDateTime,
-                                 end = tt.EndDateTime,
-                                 day = ct.day,
-                                 teacher = user.UserName,
-                                 gr = g.GroupName
-                             }).OrderBy(s=>s.day).ThenBy(t=>t.start).ToList();
-                foreach (var s in sched)
-                {
-                    CultureInfo ci = new CultureInfo("en-US");
-                    var date = new DateTime();
-                    for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                    {
-                        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
-                        if (date.DayOfWeek == s.day)
-                        {
-                            events.Add(new ScheduleVIewModel()
-                            {
-                                Name = s.title,
-                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
-                                End = s.end.ToShortTimeString(),
-                                Teacher = s.teacher,
-                                Group = s.gr,
-                                Day = s.day
-                            });
-                        }
-                    }
-                }
+                                 Name = sub.Name,
+                                 Start = tt.StartDateTime.ToShortTimeString(),
+                                 End = tt.EndDateTime.ToShortTimeString(),
+                                 Day = ct.day,
+                                 Teacher = user.UserName,
+                                 Group = g.GroupName
+                             }).OrderBy(s=>s.Day).ThenBy(t=>t.Start).ToList();
+                events.AddRange(sched);
+                //foreach (var s in sched)
+                //{
+                //    CultureInfo ci = new CultureInfo("en-US");
+                //    var date = new DateTime();
+                //    for (int i = 1; i <= ci.Calendar.GetDa .GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+                //    {
+                //        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+                //        if (date.DayOfWeek == s.day)
+                //        {
+                //            events.Add(new ScheduleVIewModel()
+                //            {
+                //                Name = s.title,
+                //                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
+                //                End = s.end.ToShortTimeString(),
+                //                Teacher = s.teacher,
+                //                Group = s.gr,
+                //                Day = s.day
+                //            });
+                //        }
+                //    }
+                //}
             }
             else
             {
@@ -87,28 +88,28 @@ namespace Diploma.Controllers
                                  teacher = te.TeacherId,
                                  gr = g.GroupName
                              }).OrderBy(s => s.day).ThenBy(t=>t.start).ToList();
-                foreach (var s in sched)
-                {
-                    CultureInfo ci = new CultureInfo("en-US");
-                    var date = new DateTime();
-                    for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                    {
-                        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
-                        if (date.DayOfWeek == s.day)
-                        {
-                            var teacher = _context.Teachers.Include(c => c.User).FirstOrDefault(t => t.TeacherId == s.teacher);
-                            events.Add(new ScheduleVIewModel()
-                            {
-                                Name = s.title,
-                                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
-                                End = s.end.ToShortTimeString(),
-                                Group = s.gr,
-                                Teacher = teacher.User.Name,
-                                Day = s.day
-                            });
-                        }
-                    }
-                }
+                //foreach (var s in sched)
+                //{
+                //    CultureInfo ci = new CultureInfo("en-US");
+                //    var date = new DateTime();
+                //    for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+                //    {
+                //        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+                //        if (date.DayOfWeek == s.day)
+                //        {
+                //            var teacher = _context.Teachers.Include(c => c.User).FirstOrDefault(t => t.TeacherId == s.teacher);
+                //            events.Add(new ScheduleVIewModel()
+                //            {
+                //                Name = s.title,
+                //                Start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second).ToShortTimeString(),
+                //                End = s.end.ToShortTimeString(),
+                //                Group = s.gr,
+                //                Teacher = teacher.User.Name,
+                //                Day = s.day
+                //            });
+                //        }
+                //    }
+                //}
             }
 
 
