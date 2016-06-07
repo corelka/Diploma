@@ -10,7 +10,7 @@
     {
         <br>
         <div class="form-group">
-            <input type="text" class="form-control dashName" asp-for="@Model.title" placeholder="Name of event" required /><br>
+            <input type="text" class="form-control dashName" asp-for="@Model.title" placeholder="Name of event" required autofocus /><br>
             <input type="text" class="form-control datetimepicker dashName" readonly="readonly" id="DateTimeStart" asp-for="@Model.start" placeholder="Event starts at.." required/><br>
             <input type="text" class="form-control datetimepicker dashName" readonly="readonly" id="DateTimeEnd" asp-for="@Model.end" placeholder="Event ends at.." required/><br>
             <input type="text" class="form-control dashName" asp-for="@Model.url" placeholder="Link" /><br>
@@ -24,7 +24,7 @@
             </label>
         </div>
         <div>
-            <button class="btn btn-primary alignbutton" id="create_event_sub">Create</button>
+            <input class="btn btn-primary alignbutton" id="create_event_sub" value="Create" type="submit"/>
             <input type="button" class="btn btn-primary alignbutton" onclick="javascript:PopUpHide('create_event')" value="Hide"/>
             <br><br>
         </div>

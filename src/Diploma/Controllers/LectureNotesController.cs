@@ -79,5 +79,19 @@ namespace Diploma.Controllers
             }
             return RedirectToAction("Overview");
         }
+        [Authorize]
+        public ActionResult DeleteLecture(int ID)
+        {            
+            var ln = _context.LecctureNotes.FirstOrDefault(t => t.LectureNotesId == ID);
+            if (ln != null)
+            {
+                var usr = _context.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                var teacher = _context.Teachers.FirstOrDefault(t => t.UserId == usr.Id);
+                if (ln.TeacherId == teacher.TeacherId)
+                _context.LecctureNotes.Remove(ln);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Overview");
+        }
     }
 }

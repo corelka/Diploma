@@ -19,6 +19,7 @@
 
             <p>@note.Subject.Name</p>
             <p>@note.Teacher.User.Name @note.Teacher.User.Surname</p>
+            <a href="@Url.Action("DeleteLecture",new { ID = note.LectureNotesId })">Delete</a>
         </div>
         
 

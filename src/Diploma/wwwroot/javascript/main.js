@@ -1,4 +1,11 @@
 ﻿$(document).ready(function () {
+    
+    //$('#fullpage').fullpage({
+    //    //menu:'#menu',
+    //    scrollOverflow: true
+    //    //normalscrollelements: '#grid'
+    //});
+    
    // PopUpHide();
     /*$('#datetimepicker1').datepicker();({
         language: 'en',
@@ -32,7 +39,8 @@
                 ( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
             });
         }
-    $('#create_dashboard').validator()
+        $('#create_dashboard').validator();
+        $('#create_table').validator();
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
         console.log($('#create_event'));
@@ -79,6 +87,10 @@
         useCurrent: false,
         showClose: true,
         ignoreReadonly: true,
+        widgetPositioning: {
+            horizontal: 'right',
+            vertical: 'auto'
+        },
         //defaultDate: moment()
         //format: 'LT',
         //locale: 'ru',

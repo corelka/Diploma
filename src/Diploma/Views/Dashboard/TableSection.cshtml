@@ -5,7 +5,7 @@
 }
 @model Diploma.Models.Table
 
-
+<div class="wraper">
 <ul class="table" id="t-@Model.Id">
     <li>
         <p>@Model.Name</p>
@@ -32,3 +32,4 @@
             @Html.Partial("IssueSection", issue)
         }
 </ul>
+    </div>

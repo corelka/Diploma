@@ -1,7 +1,8 @@
 ﻿html,body{
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: #e8f5e9;
+ overflow-x: hidden;
 }
 
 
@@ -11,9 +12,7 @@
   
  }
 
-body {
-  font-family: sans-serif;
- }
+
 .main{
     display: table;
     width: 100%;
@@ -39,7 +38,8 @@ body {
                         /*------upper menu-----*/
 
 .upper-menu{
-  width: 100%;
+ 
+  width: 100vw;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -92,7 +92,10 @@ body {
   padding: 4px 20px;
   margin: 0;
 }
-
+div.upper-menu.clearfix{
+    
+    z-index:10;
+}
 .upper-menu .sub-menu > li:last-child a{
   padding-bottom: 10px;
 }
@@ -119,6 +122,7 @@ body {
 .mdl-layout__drawer{
   background-color: #37474F;
   border: none;
+
 }
 .mdl-layout__drawer img{
   padding-right: 15px;
@@ -161,38 +165,6 @@ body {
 
 
 
-/*----------left menu------*/
-/*.slide-menu{
-  display: none;
-  position: absolute;
-  left:0;
-  top:0;
-  padding: 0;
-  width:500%;
-  background-color: #37474F;
-  z-index: 100;
-}
-.slide-menu >li{
-  display: block;
-  width:100%;
-  list-style: none;
-  border: 1px solid white;
-
-}
-.slide-menu > li img{
-  margin-right: 15px;
-}
-.slide-menu a{
-  display: block;
-  width:100%;
-  text-decoration: none;
-  padding: 15px 15px;
-  vertical-align: middle;
-}
-.upper-menu > li:hover .slide-menu{
-  display: block;*/
-
-}
 
 /* ---- grid ---- */
 
@@ -307,10 +279,32 @@ div.grid{
 .jumbotron {
     background:  url('../img/flower.jpg') no-repeat center center;
     background-size: cover;
-    text-align:left;
+    text-align:center;
+    color: white;
+    
 }
+
+.jumbotron .container, h1{
+   font-family: 'Raleway', sans-serif;
+   font-weight: 300;
+   padding: 6.5%;
+  }
+.jumbotron input{
+    background-color:transparent;
+    border:1px solid white;
+}
+.jumbotron input:hover{
+    background-color:transparent;
+    border:inherit;
+}
+
 .addTable{
     margin-top: 20px;
+}
+.addTable input[type="text"]{
+    display: inline-block;
+    margin-right:20px;
+    max-width: 25%;
 }
 
 #calendar{
@@ -441,4 +435,33 @@ a.fc-more{
       margin: 25px auto;
       max-width: 40%;
   }
+  div.wraper{
+      /*height: 100%;*/
+      /*width: 300px;*/
+      box-sizing: border-box;
+      display:inline-block;
+      vertical-align:top;
+      height: 100vh;
+      /*white-space:nowrap;*/
+  }
 
+  #create_table{
+      overflow-x: hidden;
+  }
+  ul.table{
+      background-color: #C8E6C9;
+      border: 1px solid #B9F6CA;
+      margin:5px;
+      
+      max-width: 300px;
+      
+  }
+.outer {
+    width: 100vw;
+    overflow-x: scroll;
+    overflow-y: hidden; 
+}
+.inner{
+
+    white-space:nowrap;
+}

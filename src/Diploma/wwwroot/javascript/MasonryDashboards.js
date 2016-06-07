@@ -105,3 +105,4 @@ $('#create_dashboard').submit(function (event) {
         alert('empty');
     event.preventDefault();
 })
+

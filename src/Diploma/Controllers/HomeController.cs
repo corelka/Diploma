@@ -33,6 +33,12 @@ namespace Diploma.Controllers
             else
                 return RedirectToAction("Login", "Account");
         }
+        
+        [Authorize]
+        public ViewResult Contacts()
+        {
+            return View();
+        }
 
         //public ViewResult Notes()
         //{

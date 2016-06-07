@@ -6,11 +6,10 @@
 }
 @model Diploma.Models.Dashboard
 
-@using (Html.BeginForm("CreateTable", "Dashboard", new { Did = Model.Id }, FormMethod.Post))
+@using (Html.BeginForm("CreateTable", "Dashboard", new { Did = Model.Id }, FormMethod.Post, new {id = "create_table" }))
 {
-    <div class="addTable">
-        <label>New Table</label>
-        <input type="text" name="Name" required/>
+    <div class="addTable form-group">
+        <input type="text" name="Name" class="form-control dashName" placeholder="Table name" autofocus required/>
         <input type="submit" class="btn btn-primary" value="Create Table" />
     </div>
 }
@@ -18,8 +17,12 @@
     @Html.Partial("CreateIssue", new Diploma.ViewModels.IssueViewModel())
     @Html.Partial("ChangeIssue", new Diploma.ViewModels.IssueViewModel())
 </div>
-    @foreach (var table in Model.Tables)
-    {
-        @Html.Partial("TableSection", table);
-    }
+<div class="outer">
+    <div class="inner">
+        @foreach (var table in Model.Tables)
+        {
+            @Html.Partial("TableSection", table);
+        }
+    </div>
+</div>
 

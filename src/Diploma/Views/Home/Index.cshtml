@@ -9,19 +9,20 @@
 <div class="overlay">
     @Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel())
 </div>
-<div class="jumbotron" >
-    <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+<div id="fullpage">
+<div class="jumbotron section" >
+    <div class="container"> 
+        <h1>ASAP</h1>
+        <p>Manage your ideas and tasks, keep an eye on your calendar events and schedule, learn lectures remotely and always be in the picture. </p>
+        <p><input class="btn btn-primary btn-lg" onclick="window.location='@Url.Action("Contacts","Home")'" type="button" role="button" value="Learn more" &raquo;/></p>
     </div>
 </div>
-<div class="grid">
+<div id="grid" class="grid section">
     <div class="grid-item" style="display:table" id="addDashboard" onclick="PopUpShow('create_dashboard',true)">
         <p id="addDashboard" style="display:table-cell; vertical-align:middle; font-size: 80px;">+</p>
     </div>
 </div>
-
+</div>
 <script src="~/lib/masonry/dist/masonry.pkgd.js"></script>
 <script src="~/javascript/MasonryDashboards.js"></script>
 <script>
