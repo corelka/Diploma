@@ -77,75 +77,76 @@ namespace Diploma.Controllers
         public JsonResult GetEvents()
         {
             var events = _context.Events.Where(t => t.UserName == User.Identity.Name).ToList();
-            var user = _context.Users.FirstOrDefault(t => t.UserName == User.Identity.Name);
-            if(_userManager.IsInRoleAsync(user, "Teacher").GetAwaiter().GetResult())
-            {
-                var user_ = _context.Teachers.FirstOrDefault(t => t.UserId == user.Id);
-                var sched = (from ct in _context.Schedules
-                             join sub in _context.Subjects on ct.SubjectId equals sub.SubjectId
-                             join tt in _context.TimeTables on ct.TimeTableId equals tt.TimeTableId
-                             where ct.TeacherId == user_.TeacherId
-                             select new
-                             {
-                                 title = sub.Name,
-                                 start = tt.StartDateTime,
-                                 end = tt.EndDateTime,
-                                 day = ct.day
-                             }).ToList();
-                foreach (var s in sched)
-                {
-                    CultureInfo ci = new CultureInfo("en-US");
-                    var date = new DateTime();
-                    for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                    {
-                        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
-                        if (date.DayOfWeek == s.day)
-                        {
-                            events.Add(new CalendarEvent()
-                            {
-                                title = s.title,
-                                start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
-                                end = s.end
-                            });
-                        }
-                    }
-                }
-                return Json(events);
-            }
-            else
-            {
-                var user_ = _context.Students.FirstOrDefault(t => t.UserId == user.Id);
-                var sched = (from ct in _context.Schedules
-                             join sub in _context.Subjects on ct.SubjectId equals sub.SubjectId
-                             join tt in _context.TimeTables on ct.TimeTableId equals tt.TimeTableId
-                             where ct.TeacherId == user_.StudentId
-                             select new
-                             {
-                                 title = sub.Name,
-                                 start = tt.StartDateTime,
-                                 end = tt.EndDateTime,
-                                 day = ct.day
-                             }).ToList();
-                foreach (var s in sched)
-                {
-                    CultureInfo ci = new CultureInfo("en-US");
-                    var date = new DateTime();
-                    for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                    {
-                        date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
-                        if (date.DayOfWeek == s.day)
-                        {
-                            events.Add(new CalendarEvent()
-                            {
-                                title = s.title,
-                                start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
-                                end = s.end
-                            });
-                        }
-                    }
-                }
-                return Json(events);
-            }            
+            return Json(events);
+            //var user = _context.Users.FirstOrDefault(t => t.UserName == User.Identity.Name);
+            //if(_userManager.IsInRoleAsync(user, "Teacher").GetAwaiter().GetResult())
+            //{
+            //    var user_ = _context.Teachers.FirstOrDefault(t => t.UserId == user.Id);
+            //    var sched = (from ct in _context.Schedules
+            //                 join sub in _context.Subjects on ct.SubjectId equals sub.SubjectId
+            //                 join tt in _context.TimeTables on ct.TimeTableId equals tt.TimeTableId
+            //                 where ct.TeacherId == user_.TeacherId
+            //                 select new
+            //                 {
+            //                     title = sub.Name,
+            //                     start = tt.StartDateTime,
+            //                     end = tt.EndDateTime,
+            //                     day = ct.day
+            //                 }).ToList();
+            //    foreach (var s in sched)
+            //    {
+            //        CultureInfo ci = new CultureInfo("en-US");
+            //        var date = new DateTime();
+            //        for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+            //        {
+            //            date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+            //            if (date.DayOfWeek == s.day)
+            //            {
+            //                events.Add(new CalendarEvent()
+            //                {
+            //                    title = s.title,
+            //                    start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
+            //                    end = s.end
+            //                });
+            //            }
+            //        }
+            //    }
+            //    return Json(events);
+            //}
+            //else
+            //{
+            //    var user_ = _context.Students.FirstOrDefault(t => t.UserId == user.Id);
+            //    var sched = (from ct in _context.Schedules
+            //                 join sub in _context.Subjects on ct.SubjectId equals sub.SubjectId
+            //                 join tt in _context.TimeTables on ct.TimeTableId equals tt.TimeTableId
+            //                 where ct.TeacherId == user_.StudentId
+            //                 select new
+            //                 {
+            //                     title = sub.Name,
+            //                     start = tt.StartDateTime,
+            //                     end = tt.EndDateTime,
+            //                     day = ct.day
+            //                 }).ToList();
+            //    foreach (var s in sched)
+            //    {
+            //        CultureInfo ci = new CultureInfo("en-US");
+            //        var date = new DateTime();
+            //        for (int i = 1; i <= ci.Calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+            //        {
+            //            date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+            //            if (date.DayOfWeek == s.day)
+            //            {
+            //                events.Add(new CalendarEvent()
+            //                {
+            //                    title = s.title,
+            //                    start = new DateTime(date.Year, date.Month, date.Day, s.start.Hour, s.start.Minute, s.start.Second),
+            //                    end = s.end
+            //                });
+            //            }
+            //        }
+            //    }
+            //    return Json(events);
+            //}            
         }
 
         [Authorize]
