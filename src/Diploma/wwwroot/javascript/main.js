@@ -43,7 +43,7 @@
         $('#create_table').validator();
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
-        console.log($('#create_event'));
+        //console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),
             allDay: $('#allDay').val(),
@@ -52,7 +52,7 @@
             url: $('#url').val(),
             editable: $('#editable').val()
         };
-        console.log(JSON.stringify(req));
+        //console.log(JSON.stringify(req));
         //console.log($('#create_event').serialize());
         $.ajax({
             url: "/CalendarEvent/CreateEvent",
