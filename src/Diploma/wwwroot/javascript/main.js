@@ -45,7 +45,7 @@
         $('#create_table').validator();
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
-        console.log($('#create_event'));
+        //console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),
             allDay: $('#allDay').is(':checked'),
@@ -54,7 +54,7 @@
             url: $('#url').val(),
             editable: $('#editable').is(':checked')
         };
-        console.log(JSON.stringify(req));
+        //console.log(JSON.stringify(req));
         //console.log($('#create_event').serialize());
         $.ajax({
             url: "/CalendarEvent/CreateEvent",
