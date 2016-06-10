@@ -17,22 +17,35 @@
     
  
     <link href="~/lib/fullpage.js/dist/jquery.fullpage.min.css" rel="stylesheet" />
-  
-
+    <link href="~/stylesheet/menu.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel='stylesheet' type='text/css'>
     <link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
     @*<link href="~/stylesheet/cal.css" rel="stylesheet" />*@
     <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/mdl/material.min.css" rel="stylesheet" />
-    <link href="~/stylesheet/layoutstylesheet.css" rel="stylesheet" />
+  
     @*<link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />*@
     <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
     <link href="~/stylesheet/style.css" rel="stylesheet" />
     <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
     <script src="~/lib/fullpage.js/vendors/scrolloverflow.min.js"></script>
-    <script src="~/lib/fullpage.js/dist/jquery.fullpage.min.js"></script>
+    @*<script src="~/lib/fullpage.js/dist/jquery.fullpage.min.js"></script>*@
     
+
+
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+
+    <link href="~/stylesheet/layoutstylesheet.css" rel="stylesheet" />
+
+    <link href="~/stylesheet/menu.css" rel="stylesheet" />
+
    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>--> 
     <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
     <style>   
@@ -61,6 +74,7 @@
               display: none;
               position: relative;
               margin:40px auto 0px auto;
+              z-index:20;
               width: 30em;
               height: auto;
               padding:10px;
@@ -114,8 +128,72 @@
     </script>-->
 </head>
 <body>
-
-    <div>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">
+                    <i class="material-icons" id="account">account_circle</i>
+                    <ul class="submenu">
+                        @*<li><a href="#">Go to my profile</a></li>*@
+                        <li><a asp-controller="Account" asp-action="ChangeProfile">Edit profile</a></li>
+                        <li><a asp-controller="Account" asp-action="Logout">Exit</a></li>
+                    </ul>
+                </span>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title"><img class="asap" src="~/img/ASAP.png"></span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/dashboard24.png" />
+                    Dashboards
+                </a>
+                <a class="mdl-navigation__link" asp-controller="Calendar" asp-action="Overview">
+                    <img src="~/img/calendar24.png" />
+                    Calendar
+                </a>
+                <a class="mdl-navigation__link" asp-controller="Schedule" asp-action="Overview">
+                    <img src="~/img/schedule24.png" />
+                    Schedule
+                </a>
+                <a class="mdl-navigation__link" asp-controller="LectureNotes" asp-action="Overview">
+                    <img src="~/img/lecture24.png" />
+                    Lectures &amp; Notes
+                </a>
+                <a class="mdl-navigation__link" href="">
+                    <img src="~/img/contacts24.png" />
+                    Contact us
+                </a>
+            </nav>
+        </div>
+        <div class="overlay">
+       @ViewBag.Popup
+            @ViewBag.Popup2
+</div>
+        <main class="mdl-layout__content">
+            <div class="main">@RenderBody()</div>
+        </main>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @*<div>
         <ul class="upper-menu clearfix">
             <li class="mdl-js-layout mdl-layout" id="access">
                 <div class="mdl-layout__drawer">
@@ -156,15 +234,14 @@
                     <img src="~/img/account.png" />
                 </a>
                 <ul class="sub-menu" id="submenu">
-                    @*<li><a href="#">Go to my profile</a></li>*@
+                    @*<li><a href="#">Go to my profile</a></li> 
                     <li><a asp-controller="Account" asp-action="ChangeProfile">Edit profile</a></li>
                     <li><a asp-controller="Account" asp-action="Logout">Exit</a></li>
                 </ul>
             </li>
         </ul>
     <div class="main">
-        @RenderBody()
-    </div>
+    </div>*@
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>    
     <script src="~/javascript/main.js"></script>
     <script src="~/lib/mdl/material.min.js"></script>

@@ -1,0 +1,79 @@
+.mdl-layout .mdl-layout__header {
+  background-color: #37474F;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row {
+  background-color: #37474F;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-layout__drawer-button {
+  background-color: #37474F;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-layout__drawer-button:hover {
+  background: #546E7A;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  margin: 10px;
+  left: 60px;
+}
+@media screen and (max-width: 1024px) {
+  .mdl-layout .mdl-layout__header .mdl-layout__header-row span {
+    margin: 4px;
+  }
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span i {
+  padding: 12px;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span:hover {
+  background: #546E7A;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span .submenu {
+  position: absolute;
+  display: none;
+  top: 52px;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span .submenu a {
+  display: block;
+  text-decoration: none;
+  padding: 5px 15px;
+  width: 150px;
+  color: white;
+  min-height: 25px;
+  background: #37474f;
+}
+.mdl-layout .mdl-layout__header .mdl-layout__header-row span .submenu a:hover {
+  background: #546E7A;
+  text-decoration: none;
+}
+.mdl-layout .mdl-layout__drawer {
+  background: #37474f;
+  border: none;
+}
+.mdl-layout .mdl-layout__drawer .mdl-layout-title {
+  width: 100%;
+  padding: 20px;
+}
+.mdl-layout .mdl-layout__drawer .mdl-layout-title img {
+  float: right;
+}
+.mdl-layout .mdl-layout__drawer img {
+  padding-right: 15px;
+  margin-left: 40px;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation {
+  padding-top: 0;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  color: white;
+  padding-left: 0;
+  text-align: left;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+  background: #546e7a;
+}

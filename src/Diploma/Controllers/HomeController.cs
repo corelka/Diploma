@@ -54,5 +54,9 @@ namespace Diploma.Controllers
         //    }                
         //    return View();
         //}
+        public ViewResult Error()
+        {
+            return View();
+        }
     }
 }

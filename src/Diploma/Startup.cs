@@ -88,7 +88,8 @@ namespace Diploma
             services.AddIdentity<User, UserRoles>(config =>
             {
                 config.User.RequireUniqueEmail = true;
-                config.Password.RequiredLength = 6;                    
+                config.Password.RequiredLength = 6;
+
             })
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DashboardContext>();

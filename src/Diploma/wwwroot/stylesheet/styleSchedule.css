@@ -60,7 +60,7 @@ Main components
 
 -------------------------------- */
 header {
-  height: 200px;
+  
   line-height: 200px;
   text-align: center;
   background: #303e49;
@@ -72,7 +72,7 @@ header h1 {
 }
 @media only screen and (min-width: 1170px) {
   header {
-    height: 300px;
+    
     line-height: 300px;
   }
   header h1 {

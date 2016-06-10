@@ -1,0 +1,82 @@
+﻿.mdl-layout{
+  .mdl-layout__header{
+      background-color: #37474F;
+     .mdl-layout__header-row{
+       background-color: #37474F;
+       .mdl-layout__drawer-button{
+           background-color: #37474F;
+          &:hover{
+             background:#546E7A;
+        }
+      }
+      span{
+         position:absolute;
+        @media screen and (max-width:1024px){
+          margin:4px;
+        }
+        height:48px;
+        width:48px;
+        cursor:pointer;
+        margin:10px;
+        left:60px;
+        i{
+          padding:12px;
+        }
+      
+        &:hover{
+          background:#546E7A;
+        }
+      
+        .submenu{
+        position:absolute;
+        display:none;
+        top:52px;
+        left:0;
+        list-style:none;
+        padding:0;
+        margin:0;
+        
+       
+        a{
+          display:block;
+          text-decoration:none;
+          padding:5px 15px;
+          width:150px;
+          color:white;
+          min-height:25px;
+          background:#37474f;
+          &:hover{
+            background:#546E7A;
+            text-decoration:none;
+          }        
+       }
+      }
+    }
+      }
+  }
+  .mdl-layout__drawer{
+      background:#37474f;
+      border:none;
+      .mdl-layout-title{
+          width:100%;
+          padding:20px;
+          img{
+              float:right;
+          }
+      }
+      img{
+          padding-right: 15px;
+          margin-left: 40px;
+      }
+      .mdl-navigation{
+          padding-top:0;
+      .mdl-navigation__link{
+          color:white;
+          padding-left:0;
+          text-align:left;
+          &:hover{
+              background:#546e7a;
+          }
+      }
+  }
+}}

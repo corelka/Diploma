@@ -6,7 +6,7 @@
 }
 @model Diploma.ViewModels.RegistrationViewModel
 
-<form method="post" class="registration-form" enctype="multipart/form-data">
+<form method="post" class="registration-form" enctype="multipart/form-data" id="registration">
     @Html.AntiForgeryToken()
     <h4>Registration form</h4>
     <div class="registration-block">
@@ -70,7 +70,7 @@
             </div>
             <div>
                 <label asp-for="StudentCard"></label>
-                <input class="form-control dashName" asp-for="StudentCard" placeholder="AA00000000" style="text-transform: uppercase;" />
+                <input class="form-control dashName" asp-for="StudentCard" placeholder="AA00000000" style="text-transform: uppercase;" /><br><br>
             </div>
         </div>
 

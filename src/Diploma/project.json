@@ -29,10 +29,11 @@
     "System.ComponentModel.Annotations": "4.0.11-beta-23516",
     "Newtonsoft.Json": "8.0.3",
     "Microsoft.AspNet.Mvc.WebApiCompatShim": "6.0.0-rc1-final",
+    "dotless": "1.5.2"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5000",
+    "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://10.11.46.60:5000",
     "ef": "EntityFramework.Commands"
   },
 

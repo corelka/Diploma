@@ -4,11 +4,12 @@
 @model IEnumerable<Diploma.Models.Dashboard>
 @{
     ViewBag.Title = "Home Page";
-    
+    ViewBag.Popup = @Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel());
 }
-<div class="overlay">
-    @Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel())
-</div>
+@*@Html.Partial("CreateDashboard", new Diploma.ViewModels.DashboardViewModel())*@
+@*<div class="overlay">
+    
+</div>*@
 <div id="fullpage">
 <div class="jumbotron section" >
     <div class="container"> 

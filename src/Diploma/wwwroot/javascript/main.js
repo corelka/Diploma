@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     
+    
     //$('#fullpage').fullpage({
     //    //menu:'#menu',
     //    scrollOverflow: true
@@ -40,17 +41,18 @@
             });
         }
         $('#create_dashboard').validator();
+        $('#registration').validator();
         $('#create_table').validator();
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
         console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),
-            allDay: $('#allDay').val(),
+            allDay: $('#allDay').is(':checked'),
             start: $('#DateTimeStart').val(),
             end: $('#DateTimeEnd').val(),
             url: $('#url').val(),
-            editable: $('#editable').val()
+            editable: $('#editable').is(':checked')
         };
         console.log(JSON.stringify(req));
         //console.log($('#create_event').serialize());
@@ -303,7 +305,9 @@ $('body').on("mouseup", function () {
 
 function PopUpShow(window,clear) {
     //console.log(window);
+    //$(".overlay").append("'#' + window");
     $(".overlay").show();
+
     $('#' + window).show();
     if (window === 'create_event_popup') {
         $('#DateTimeEnd').data("DateTimePicker").minDate('01-01-1900');
@@ -368,4 +372,12 @@ $(function () {
 $('.overlay').click(function (event) {
     if ($(event.target).hasClass('overlay'))
         PopUpHide();
+});
+
+$('#account').click(function () {
+    $('.submenu').toggle();
+});
+
+$('.submenu').mouseleave(function () {
+    $('.submenu').toggle();
 });

@@ -2,16 +2,15 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Title = "Calendar";
+    ViewBag.Popup = @Html.Partial("CreateEvent", new Diploma.ViewModels.CreateEventViewModel());
 }
 @*<script>$('#calendar').fullCalendar('refetchEvents')</script>*@
 <div>
     <input type="button" class="btn btn-primary addEventCalendar" onclick="javascript:PopUpShow('create_event_popup',true)" value="Create Event"/>
 </div>   
  <div id="calendar">
-    </div>
+ </div>
  
-<div class="overlay">
-    @Html.Partial("CreateEvent", new Diploma.ViewModels.CreateEventViewModel())
-</div>
 
     

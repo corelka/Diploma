@@ -37,7 +37,7 @@
 
                         /*------upper menu-----*/
 
-.upper-menu{
+/*.upper-menu{
  
   width: 100vw;
   list-style: none;
@@ -156,7 +156,7 @@ div.upper-menu.clearfix{
   /*left: 15px;
   top: 5px;
   z-index: 200;*/
-}
+}*/
 
 
 
@@ -452,9 +452,15 @@ a.fc-more{
       background-color: #C8E6C9;
       border: 1px solid #B9F6CA;
       margin:5px;
+      width: 250px;
       
-      max-width: 300px;
-      
+  }
+  ul.table > li {
+      margin:2px;
+  }
+  ul.table >li:first-child,
+  ul.table >li:nth-child(2){
+      display:inline-block;
   }
 .outer {
     width: 100vw;

@@ -12,13 +12,13 @@
         <div>
             @using (Html.BeginForm("DeleteTable", "Dashboard", new { id = Model.Id, Did = Model.DashboardId }, FormMethod.Post))
             {
-                <input type="submit" value="Delete Table" />
+                <button type="submit" form="@Model.Id" class="btn btn-primary" ><i class="material-icons">delete</i></button>
             }
         </div>
     </li>
     <li>
 
-        <button class="AddIssue">Create new issue</button>
+        <button class="AddIssue btn btn-primary"><i class="material-icons">add</i></button>
         <!--<div>
             //using (Html.BeginForm("CreateIssue", "Dashboard", new { id = Model.Id }, FormMethod.Get))
             {

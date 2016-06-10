@@ -3,6 +3,8 @@
 *@
 @{
     ViewBag.Title = "Dashboard Overview";
+    ViewBag.Popup = @Html.Partial("CreateIssue", new Diploma.ViewModels.IssueViewModel());
+    ViewBag.Popup2 = @Html.Partial("ChangeIssue", new Diploma.ViewModels.IssueViewModel());
 }
 @model Diploma.Models.Dashboard
 

@@ -3,6 +3,9 @@
 	"name": "ASP.NET",
 	"private": true,
   "devDependencies": {
-    "bower": "1.7.9"
+    "bower": "1.7.9",
+    "gulp": "3.9.1",
+    "rimraf": "2.5.2",
+    "gulp-less": "3.0.2"
   }
 }
