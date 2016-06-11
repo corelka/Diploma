@@ -43,8 +43,10 @@
         $('#create_dashboard').validator();
         $('#registration').validator();
         $('#create_table').validator();
+        $('#window_create').validator();
+        $('#window_change form:first-child').validator();
     $('#create_event_sub').click(function () {
-        var p = $('#create_event').serialize();
+        var p = $('#create_event_popup').serialize();
         //console.log($('#create_event'));
         var req = {        
             title: $('#title').val(),

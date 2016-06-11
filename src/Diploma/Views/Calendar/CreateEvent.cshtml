@@ -4,9 +4,9 @@
 @{
 }
 @model Diploma.ViewModels.CreateEventViewModel
-<div id="create_event_popup" class="popup">
+@*<div id="create_event_popup" class="popup">*@
     <h4>Create new event</h4>
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "create_event"}))
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "create_event_popup", @class= "popup"}))
     {
         <br>
         <div class="form-group">
@@ -25,9 +25,9 @@
         </div>
         <div>
             <input class="btn btn-primary alignbutton" id="create_event_sub" value="Create" type="submit"/>
-            <input type="button" class="btn btn-primary alignbutton" onclick="javascript:PopUpHide('create_event')" value="Hide"/>
+            <input type="button" class="btn btn-primary alignbutton" onclick="javascript: PopUpHide('create_event_popup')" value="Hide"/>
             <br><br>
         </div>
             //<input type="submit" value="Create" />
     }
-</div>
+@*</div>*@

@@ -5,24 +5,20 @@
 
 }
 @model Diploma.ViewModels.IssueViewModel
-    <div id="window_create" class="popup">
+    @*<div id="window_create" >*@
         <p>"Create New Issue"</p>
-        @using (Html.BeginForm("CreateIssue", "Dashboard", FormMethod.Post))
+        @using (Html.BeginForm("CreateIssue", "Dashboard", FormMethod.Post, new { id = "window_create", @class="popup" }))
         {
-            <a href="javascript:PopUpHide('window_create')">Hide</a>
             <input type="hidden" name="tableId" value="@ViewBag.TableId" asp-for="@Model.TableID" />
-            <div>
-                <label>Name</label>
-                <input type="text" asp-for="@Model.Name" />
+            <div class="form-group">
+                <input type="text" class="form-control" asp-for="@Model.Name" placeholder="Name" required autofocus /><br/>
+                <input type="text" class="form-control" asp-for="@Model.Description" placeholder="Description" required /><br />
+                <input type="text" class="form-control" asp-for="@Model.Comments" placeholder="Comment (if needed)"/><br />
             </div>
             <div>
-                <label>Description</label>
-                <input type="text" asp-for="@Model.Description" />
+                <input type="submit" class="btn btn-primary alignbutton" value="Create" />
+                <input type="button" class="btn btn-primary alignbutton" onclick="javascript: PopUpHide('window_create')" value="Hide" />
             </div>
-            <div>
-                <label>Comments</label>
-                <input type="text" asp-for="@Model.Comments" />
-            </div>
-            <input type="submit" class="btn btn-primary" value="Create" />
+            
         }
-    </div>
+    @*</div>*@
