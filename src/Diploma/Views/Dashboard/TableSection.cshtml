@@ -10,7 +10,7 @@
     <li>
         <p>@Model.Name</p>
         <div>
-            @using (Html.BeginForm("DeleteTable", "Dashboard", new { id = Model.Id, Did = Model.DashboardId }, FormMethod.Post))
+            @using (Html.BeginForm("DeleteTable", "Dashboard", new { id = Model.Id, Did = Model.DashboardId }, FormMethod.Post,new { id = Model.Id}))
             {
                 <button type="submit" form="@Model.Id" class="btn btn-primary" ><i class="material-icons">delete</i></button>
             }

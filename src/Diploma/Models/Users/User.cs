@@ -13,14 +13,6 @@ namespace Diploma.Models
 {
     public class User : IdentityUser
     {
-        /*public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }*/
-
         public DateTime CreateDate { get; set; }
         public string Name { get; set; }
 
@@ -32,8 +24,6 @@ namespace Diploma.Models
         public virtual Teacher Teacher { get; set; }
         public User()
         {
-            //Dashboards = new HashSet<Dashboard>();
         }
-        //public virtual ICollection<Dashboard> Dashboards { get; set; }
     }
 }

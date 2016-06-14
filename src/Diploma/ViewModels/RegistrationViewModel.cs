@@ -29,15 +29,10 @@ namespace Diploma.ViewModels
         public string Password { get; set; }
         [Required]
         public string Group { get; set; }
-
-        public int Course { get; set; }
-        
+        public int Course { get; set; }        
         public string StudentCard { get; set;}
-
         public ICollection<string> Groups { get; set; }
-
         public ICollection<string> Subjects { get; set; }
-
         public IFormFile Avatar { get; set; }
     }
 }

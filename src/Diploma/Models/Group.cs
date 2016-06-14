@@ -16,7 +16,6 @@ namespace Diploma.Models
         }
         public int GroupId { get; set; }
         public string GroupName { get; set; }
-        //public Student Head { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<TeacherGroup> Teachers { get; set; }
         public virtual ICollection<SubjectGroups> Subjects { get; set; }

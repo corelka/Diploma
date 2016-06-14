@@ -72,7 +72,7 @@ namespace Diploma.Controllers
                     string nameLecNote = teacher.TeacherId + AccountController.GetFileName(lect.Attachment.ContentDisposition)[0] + '.' + AccountController.GetFileName(lect.Attachment.ContentDisposition)[1];
                     string pathForName = "wwwroot/Files/" + nameLecNote;
                     lect.Attachment.SaveAs(pathForName);
-                    ln.Attachment = AccountController.WebSite+"/Files/"+nameLecNote;
+                    ln.Attachment = "/Files/"+nameLecNote;
                 }
                 _context.LecctureNotes.Add(ln);
                 _context.SaveChanges();
