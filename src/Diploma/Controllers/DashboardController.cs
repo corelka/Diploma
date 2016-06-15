@@ -50,17 +50,12 @@ namespace Diploma.Controllers
 
                 _context.Dashboards.Add(NewDash);
                 _context.SaveChanges();
-                //HttpContentExtensions.CreateXmlSerializable
-                //HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
-                //{
-                //    Content = new HttpContent().,
 
-                //};
                 return NewDash;
             }
             catch
             {
-                return null;//new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return null;
             }            
         }
 

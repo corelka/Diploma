@@ -40,20 +40,6 @@ namespace Diploma.Controllers
             return View();
         }
 
-        //public ViewResult Notes()
-        //{
-        //    var user = _context.Users.FirstOrDefault(t => t.Name == User.Identity.Name);
-        //    var notes = new List<Note>();
-        //    if (user is Teacher)
-        //    {
-        //        notes = _context.Notes.Where(t => t.TeacherId == ((Teacher)user).TeacherId).ToList();
-        //    }
-        //    else if (user is Student)
-        //    {
-        //        //notes = _context.Notes.Where(t => t.Groups.First(r => r == ((Student)user).Group) != null).ToList();
-        //    }                
-        //    return View();
-        //}
         public ViewResult Error()
         {
             return View();

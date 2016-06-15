@@ -59,9 +59,9 @@ input[type="text"],input[type="password"]{
   input[type="image"]{
     width:25%;
     height: 20%;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
+    /*-webkit-transition: -webkit-transform .8s ease-in-out;*/
     -ms-transition: -ms-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    /*transition: transform .8s ease-in-out;*/
     }
   input[type="image"]:hover{
     transform:rotate(360deg);
