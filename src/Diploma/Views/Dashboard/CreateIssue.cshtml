@@ -9,20 +9,21 @@
         <p>"Create New Issue"</p>
         @using (Html.BeginForm("CreateIssue", "Dashboard", FormMethod.Post))
         {
-            <a href="javascript:PopUpHide('window_create')">Hide</a>
+            
             <input type="hidden" name="tableId" value="@ViewBag.TableId" asp-for="@Model.TableID" />
             <div>
-                <label>Name</label>
-                <input type="text" asp-for="@Model.Name" />
+            
+                <input type="text" class="form-control dashName" placeholder="Name" asp-for="@Model.Name" required/>
+           
+        
+                <input type="text" class="form-control dashName" asp-for="@Model.Description" />
             </div>
             <div>
-                <label>Description</label>
-                <input type="text" asp-for="@Model.Description" />
+                
+                <input type="text" class="form-control dashName" placeholder="Comments" asp-for="@Model.Comments" />
             </div>
-            <div>
-                <label>Comments</label>
-                <input type="text" asp-for="@Model.Comments" />
-            </div>
+            <input type="button" onclick="javascript:PopUpHide('window_create')" class="btn btn-primary" value="Hide" />
             <input type="submit" class="btn btn-primary" value="Create" />
+
         }
     </div>

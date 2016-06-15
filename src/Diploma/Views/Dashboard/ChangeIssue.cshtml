@@ -10,20 +10,14 @@
         {
             <input type="hidden" asp-for="@Model.TableID" name="tableId" />
             <input type="hidden" asp-for="@Model.Id" name="id"/>
-            <a href="javascript:PopUpHide('window_change')">Hide</a>
+            
             <div>
-                <label>Name of issue</label>
-                <input type="text" asp-for="@Model.Name"  name="name"/>
+                <input type="text" class="form-control dashName" asp-for="@Model.Name"  placeholder="Name of issue" name="name" required/>
+                <input type="text" class="form-control dashName" asp-for="@Model.Description" placeholder="Description" name="description"/>
+                <input type="text" class="form-control dashName" asp-for="@Model.Comments" placeholder="Comments" name="comments"/>
             </div>
-            <div>
-                <label>Description</label>
-                <input type="text" asp-for="@Model.Description" name="description"/>
-            </div>
-            <div>
-                <label>Comments</label>
-                <input type="text" asp-for="@Model.Comments" name="comments"/>
-            </div>
-            <input type="submit" value="Save Changes" />
+            <input type="submit" class="btn btn-primary" value="Save changes" />
+            <input type="button" class="btn btn-primary" onclick="javascript:PopUpHide('window_change')" value="Hide" />
         }
         @using (Html.BeginForm("DeleteIssue", "Dashboard", FormMethod.Post))
         {

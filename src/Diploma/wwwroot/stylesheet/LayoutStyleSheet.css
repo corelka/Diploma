@@ -390,6 +390,10 @@ a.fc-more{
       max-width:75%;
       margin: 25px auto;
   }
+  div.upload-form-lectures input[type="text"]{
+      width:35%;
+      margin:0 auto;
+  }
   .upload-form-lectures .multiple-select-block{
       margin:0 auto;
   }
@@ -406,22 +410,25 @@ a.fc-more{
       background-color: #C8E6C9;
   }
   div.document-to-download-upper{
-      display:table;
+      display:block;
       width:100%;
-      border:1px solid white;
+      /*border:1px solid white;*/
   }
-  div.document-to-download-middle{
+  /*div.document-to-download-middle{
       display:table-row;
-  }
+  }*/
   div.document-to-download-lower{
 /*    border:1px solid white;*/
       border:1px solid #F1F8E9;
-      display:table-cell;
+      display:inline-block;
       width:25%;
       height:25%;
       margin:5px;
       font-size:22px;
       background-color: #A5D6A7;
+  }
+  div.document-to-download-lower input[type="button"]{
+      margin:5px;
   }
   div.document-to-download-lower p{
       margin:5px auto;
@@ -457,10 +464,16 @@ a.fc-more{
   }
   ul.table > li {
       margin:2px;
+      width:100%;
+  }
+  ul.table button{
+      margin:2px;
+      display:inline-block;
   }
   ul.table >li:first-child,
   ul.table >li:nth-child(2){
       display:inline-block;
+      
   }
 .outer {
     width: 100vw;
@@ -470,4 +483,8 @@ a.fc-more{
 .inner{
 
     white-space:nowrap;
+}
+.contacts{
+    margin: 50px auto;
+    font-family:inherit;
 }

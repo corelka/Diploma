@@ -12,18 +12,14 @@
   <div class="document-to-download-middle">
     @foreach (var note in Model)
     {
-
         <div class="document-to-download-lower">
             <p>@note.Name</p>
-            <input type="button" onclick="@note.Attachment" value="Download" class="btn btn-primary" />
+            <input type="button" onclick="window.location='@note.Attachment'" value="Download" class="btn btn-primary" />
 
             <p>@note.Subject.Name</p>
             <p>@note.Teacher.User.Name @note.Teacher.User.Surname</p>
-            <a href="@Url.Action("DeleteLecture",new { ID = note.LectureNotesId })">Delete</a>
+            <input type="button" class="btn btn-primary" onclick="window.location='@Url.Action("DeleteLecture", new { ID = note.LectureNotesId })'" value="Delete"/>
         </div>
-        
-
-
     }
 </div>
 </div>

@@ -16,7 +16,7 @@ namespace Diploma.Controllers
 {
     public class AccountController : Controller
     {
-        public const string WebSite = "http://localhost:5000";
+        public const string WebSite = "http://192.168.68.82:5000";
         private DashboardContext _context;
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;

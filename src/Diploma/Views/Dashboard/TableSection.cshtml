@@ -10,15 +10,16 @@
     <li>
         <p>@Model.Name</p>
         <div>
-            @using (Html.BeginForm("DeleteTable", "Dashboard", new { id = Model.Id, Did = Model.DashboardId }, FormMethod.Post))
+            @using (Html.BeginForm("DeleteTable", "Dashboard", new { id = Model.Id, Did = Model.DashboardId }, FormMethod.Post,new { id = Model.Id }))
             {
-                <button type="submit" form="@Model.Id" class="btn btn-primary" ><i class="material-icons">delete</i></button>
+                <button type="submit" form="@Model.Id" class="btn btn-primary issue-btn" ><i class="material-icons">delete</i></button>
             }
+            <button class="AddIssue btn btn-primary issue-btn"><i class="material-icons">add</i></button>
         </div>
     </li>
     <li>
 
-        <button class="AddIssue btn btn-primary"><i class="material-icons">add</i></button>
+        
         <!--<div>
             //using (Html.BeginForm("CreateIssue", "Dashboard", new { id = Model.Id }, FormMethod.Get))
             {

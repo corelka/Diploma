@@ -6,19 +6,19 @@
 @model Diploma.ViewModels.LectureNoteViewModel
 
 
-    @using (Html.BeginForm("CreateNote", "LectureNotes", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("CreateNote", "LectureNotes", FormMethod.Post, new { enctype = "multipart/form-data",id="file-upload"}))
     {
        <div class="upload-form-lectures">
-        <input type="text" class="dashName" placeholder="Document name" required asp-for="@Model.Name"/><br><br><br>
-        <input type="file" class="dashName" asp-for="@Model.Attachment"/><br><br>
+        <input type="text" class="form-control dashName" placeholder="Document name" required asp-for="@Model.Name"/><br><br><br>
+        <input type="file" class="dashName" asp-for="@Model.Attachment" required/><br><br>
         <div class="multiple-select-block">
-           <select class="form-control" multiple size="4" asp-for="@Model.Subject">
+           <select class="form-control"required multiple size="4" asp-for="@Model.Subject">
             @foreach (var t in ViewBag.Subs)
             {
                 <option>@t</option>
             }
-        </select>
-        <select class="form-control" size="4" asp-for="@Model.Course">
+        </select><br>
+        <select class="form-control"required size="4" asp-for="@Model.Course">
             <option>1</option>
             <option>2</option>
             <option>3</option>

@@ -43,6 +43,9 @@
         $('#create_dashboard').validator();
         $('#registration').validator();
         $('#create_table').validator();
+        $('#window_create').validator();
+        $('#window_change').validator();
+        $('#file-upload').validator();
     $('#create_event_sub').click(function () {
         var p = $('#create_event').serialize();
         //console.log($('#create_event'));
